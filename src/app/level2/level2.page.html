@@ -1,55 +1,63 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button *ngIf="id!=0"></ion-back-button>
-      <ion-menu-button *ngIf="id==0"></ion-menu-button>
-    </ion-buttons>
-    <ion-title *ngIf="id==0 || id>max_mcqs_no">Level 2</ion-title>
-    <ion-title *ngIf="id!=0 && id<=max_mcqs_no">Question {{id}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button *ngIf="id!=0"></ion-back-button>
+            <ion-menu-button *ngIf="id==0"></ion-menu-button>
+        </ion-buttons>
+        <ion-title *ngIf="id==0 || id>max_mcqs_no">Level 2</ion-title>
+        <ion-title *ngIf="id!=0 && id<=max_mcqs_no">Question {{id}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div *ngIf="id==0 && id<=max_mcqs_no">
-    <ion-row>Now here you see different MCQ that will help you to Solve to Test you Knowledge ........</ion-row>
-    <ion-row> Click to start the Level </ion-row>
+    <div *ngIf="id==0 && id<=max_mcqs_no" div>
+        <ion-row>Now here you see different MCQ that will help you to Solve to Test you Knowledge ........</ion-row>
+        <ion-row> Click to start the Level </ion-row>
 
-    <ion-button (click)="nextques(id)" expand="block">Start</ion-button>
-  </div>
-  
-  <div *ngIf="id!=0 && id<=max_mcqs_no">
+        <ion-button (click)="nextques(id)" expand="block">Start</ion-button>
+    </div>
 
-    <ion-grid>
+    <div *ngIf="id!=0 && id<=max_mcqs_no">
 
-      <ion-row style="margin:10px 0px; font-weight: bold;" >{{shared.mcqs[id-1].question}}</ion-row>
-      <ion-row *ngFor="let entry of shared.mcqs[id-1].option">
-        <ion-label>{{entry}}</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </ion-row>
-      
-      <ion-row>
-        <ion-button (click)="prevques()" expand="block">Prev</ion-button>
-        <ion-button (click)="nextques(id)" expand="block">Next</ion-button>
-      </ion-row>
+        <ion-grid>
 
-    </ion-grid>
+            <ion-row style="margin:10px 0px; font-weight: bold;">{{shared.mcqs[id-1].question}}</ion-row>
+            <ion-row *ngFor="let entry of shared.mcqs[id-1].option">
+                <ion-row>
+                    <ion-col size="8">
+                        <ion-label>{{entry}}</ion-label>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-checkbox></ion-checkbox>
+                    </ion-col>
+                </ion-row>
 
-  </div>
-  
-  <div *ngIf="id>max_mcqs_no">
 
-    <ion-grid style="text-align: center;">
+            </ion-row>
 
-      <ion-row style="margin:10px 0px; font-weight: bold;" >You Have Completed All the MCQ</ion-row>
-      <ion-row style="margin:10px 0px; font-weight: bold;font-size:20px;"> Congrts , You have completed Level 2 !! </ion-row>
+            <ion-row>
+                <ion-button (click)="prevques()" expand="block">Prev</ion-button>
+                <ion-button (click)="nextques(id)" expand="block">Next</ion-button>
+            </ion-row>
 
-      <ion-row>
-        <ion-button (click)="openpage()" expand="block">Level 3</ion-button>
-      </ion-row>
+        </ion-grid>
 
-    </ion-grid>
+    </div>
 
-  </div>
+    <div *ngIf="id>max_mcqs_no">
+
+        <ion-grid style="text-align: center;">
+
+            <ion-row style="margin:10px 0px; font-weight: bold;">You Have Completed All the MCQ</ion-row>
+            <ion-row style="margin:10px 0px; font-weight: bold;font-size:20px;"> Congrts , You have completed Level 2 !! </ion-row>
+
+            <ion-row>
+                <ion-button (click)="openpage()" expand="block">Level 3</ion-button>
+            </ion-row>
+
+        </ion-grid>
+
+    </div>
 
 </ion-content>

@@ -1,52 +1,52 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button *ngIf="id!=0"></ion-back-button>
-      <ion-menu-button *ngIf="id==0"></ion-menu-button>
-    </ion-buttons>
-    <ion-title *ngIf="id==0 || id>max_ques_no">Level 1</ion-title>
-    <ion-title *ngIf="id!=0 && id<=max_ques_no">Question {{id}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button *ngIf="id!=0"></ion-back-button>
+            <ion-menu-button *ngIf="id==0"></ion-menu-button>
+        </ion-buttons>
+        <ion-title *ngIf="id==0 || id>max_ques_no">Level 1</ion-title>
+        <ion-title *ngIf="id!=0 && id<=max_ques_no">Question {{id}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div *ngIf="id==0 && id<=max_ques_no">
-    <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
-    <ion-row> Click to start the Level </ion-row>
+    <div *ngIf="id==0 && id<=max_ques_no" div>
+        <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
+        <ion-row> Click to start the Level </ion-row>
 
-    <ion-button (click)="nextques(id)" expand="block">Start</ion-button>
-  </div>
-  
-  <div *ngIf="id!=0 && id<=max_ques_no">
+        <ion-button (click)="nextques(id)" expand="block">Start</ion-button>
+    </div>
 
-    <ion-grid>
+    <div *ngIf="id!=0 && id<=max_ques_no">
 
-      <ion-row style="margin:10px 0px; font-weight: bold;" >{{shared.qans[id-1].question}}</ion-row>
-      <ion-row> {{shared.qans[id-1].answer}}</ion-row>
+        <ion-grid>
 
-      <ion-row>
-        <ion-button (click)="prevques()" expand="block">Prev</ion-button>
-        <ion-button (click)="nextques(id)" expand="block">Next</ion-button>
-      </ion-row>
+            <ion-row style="margin:10px 0px; font-weight: bold;">{{shared.qans[id-1].question}}</ion-row>
+            <ion-row> {{shared.qans[id-1].answer}}</ion-row>
 
-    </ion-grid>
+            <ion-row>
+                <ion-button (click)="prevques()" expand="block">Prev</ion-button>
+                <ion-button (click)="nextques(id)" expand="block">Next</ion-button>
+            </ion-row>
 
-  </div>
-  
-  <div *ngIf="id>max_ques_no">
+        </ion-grid>
 
-    <ion-grid style="text-align: center;">
+    </div>
 
-      <ion-row style="margin:10px 0px; font-weight: bold;" >You Have read all the Content</ion-row>
-      <ion-row style="margin:10px 0px; font-weight: bold;font-size:20px;"> Congrts , You have completed Level 1 !! </ion-row>
+    <div *ngIf="id>max_ques_no">
 
-      <ion-row>
-        <ion-button (click)="openpage()" expand="block">Level 2</ion-button>
-      </ion-row>
+        <ion-grid style="text-align: center;">
 
-    </ion-grid>
+            <ion-row style="margin:10px 0px; font-weight: bold;">You Have read all the Content</ion-row>
+            <ion-row style="margin:10px 0px; font-weight: bold;font-size:20px;"> Congrts , You have completed Level 1 !! </ion-row>
 
-  </div>
+            <ion-row>
+                <ion-button (click)="openpage()" expand="block">Level 2</ion-button>
+            </ion-row>
+
+        </ion-grid>
+
+    </div>
 
 </ion-content>
