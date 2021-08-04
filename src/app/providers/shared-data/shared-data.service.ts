@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 
 export class SharedDataService {
 
+  cardNumber = -1;
+  cvv = -1;
+  balance = -1;
 
   qans;
   mcqs;

@@ -8,5 +8,41 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="currentView == Instructions" div>
+    <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
+    <ion-row> Click to start the Level </ion-row>
+
+    <ion-button (click)="startLevel()" expand="block">Start</ion-button>
+  </div>
+
+
+  <div *ngIf="currentView == showCardDetails" div>
+    <ion-row>Your Virtual Details: </ion-row>
+    <ion-row>Card Number: {{shared.cardNumber}}</ion-row>
+    <ion-row> CVV: {{shared.cvv}} </ion-row>
+    <ion-row> Balance: {{shared.balance}} </ion-row>
+
+    <ion-row> Your Task: Virtual pay Rs 10 to UPI ID XXX@apl </ion-row>
+    <ion-button (click)="startTask()" expand="block">Start </ion-button>
+  </div>
+
+
+  <div *ngIf="currentView == inputTransactionDetails" div>
+    <ion-row>Enter Your Virtual Card Number:  </ion-row>
+    <ion-row>Enter Your CVV: </ion-row>
+    <ion-row>Enter Receiver UPI Id: </ion-row>
+    <ion-row>Enter Money to transfer: </ion-row>
+    <ion-row>Enter your mobile number: </ion-row>
+
+    <ion-button (click)="pay()" expand="block">Pay Virtual Money </ion-button>
+  </div>
+
+
+  <div *ngIf="currentView == inputOTP" div>
+    <ion-row>Otp is valid for 1 minute</ion-row>
+    <ion-row>OTP has been Sent </ion-row>
+    <ion-row>Enter Your OTP </ion-row>
+    <ion-button (click)="checkOTP()" expand="block">submit otp</ion-button>
+  </div>
 
 </ion-content>
