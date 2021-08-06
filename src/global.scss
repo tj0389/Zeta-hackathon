@@ -37,3 +37,11 @@ ion-button {
 [div] {
     margin: 10px;
 }
+
+ion-item {
+    --highlight-color-focused: var(--ion-color-dark);
+}
+
+[level3] {
+    margin: 20px;
+}
