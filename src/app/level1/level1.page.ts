@@ -12,6 +12,7 @@ export class Level1Page implements OnInit {
 
   id:number;
   max_ques_no:number=0;
+  flag:boolean=true;
   
   constructor(private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService,public router:ActivatedRoute) { 
     
@@ -20,15 +21,37 @@ export class Level1Page implements OnInit {
       this.id=0;
     else
       this.id+=1;
-    if (shared.qans!=null && shared.qans!=undefined)
+    if (shared.qans==null || shared.qans==undefined){
+      this.fetch_qans();
+    }
+    if (shared.qans!=null && shared.qans!=undefined){
       this.max_ques_no=this.shared.qans.length;
+    }
   }
 
   ngOnInit() {
-
+    this.isdisabled(); 
   }
 
-  nextques(id:number){
+  async fetch_qans(){
+    this.shared.qans=[{question:'question1',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
+      {question:'question2',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
+      {question:'question3',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
+    ];
+    console.log(this.shared.qans);
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+  
+  async isdisabled(){
+    this.flag=true;
+    await this.delay(2000);
+    this.flag=false;
+  }
+  
+  async nextques(id:number){
     this.navCtrl.navigateForward(['level1',{id:id}])
   }
 

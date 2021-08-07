@@ -9,11 +9,14 @@ export class SharedDataService {
   cvv = 100;
   balance = 1000;
 
-  qans;
-  mcqs;
+  mcq_score:number=0;
+  mcq_score_count;
+
+  qans=null;
+  mcqs=null;
+  is_checked=[];
+
   constructor() {
-   this.fetch_qans();
-   this.fetch_mcqs();
   }
   
   async fetch_qans(){
@@ -21,25 +24,14 @@ export class SharedDataService {
       {question:'question2',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
       {question:'question3',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
       ];
-    // this.authService.getData('fetch_language').then(async (result) =>  {
-    //   if(result['status']=='success')
-    //   {
-    //       this.language=result['language'];
-    //       this.faq_lang_id=1;
-    //       this.byelaws_lang_id=1;
-    //       this.news_lang_id=1;
-    //   }
-    // },async (err) => {
-    //   console.log(err);
-    // });
   }
+
   async fetch_mcqs(){
     this.mcqs=[{question:'question1',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     {question:'question2',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     {question:'question3',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     {question:'question4',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     ];
-  console.log(this.qans);
   }
   
 //   isRootUrl() {

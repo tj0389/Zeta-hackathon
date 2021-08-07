@@ -26,12 +26,12 @@
             <ion-row> {{shared.qans[id-1].answer}}</ion-row>
 
             <ion-row>
-                <ion-button (click)="prevques()" expand="block">Prev</ion-button>
-                <ion-button (click)="nextques(id)" expand="block">Next</ion-button>
+                <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
+                <ion-button [disabled]="flag" (click)="nextques(id)" expand="block">Next</ion-button>
             </ion-row>
 
         </ion-grid>
-
+    
     </div>
 
     <div *ngIf="id>max_ques_no">
