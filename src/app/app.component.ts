@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     this.navCtrl.navigateRoot(['home']);
   }
   
-  getRouterDirection(index){
+  getdirection(index){
     return 'root';
   }
 

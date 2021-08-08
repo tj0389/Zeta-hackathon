@@ -16,6 +16,11 @@ export class SharedDataService {
   mcqs=null;
   is_checked=[];
 
+  min:number=2;
+  sec:number=0;
+
+  is_timer:boolean=false;
+
   constructor() {
   }
   
@@ -33,15 +38,5 @@ export class SharedDataService {
     {question:'question4',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     ];
   }
-  
-//   isRootUrl() {
-//     if (this.router.url == '/tab/dashboard') return true
-//     else if (this.router.url == '/tab/home') return true
-//     else if (this.router.url == '/tab/faq') return true
-//     else if (this.router.url == '/tab/subscription') return true
-//     else if (this.router.url == '/tab/news') return true
-//     else
-//       return false;
-// }
 
 }

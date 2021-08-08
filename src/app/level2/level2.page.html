@@ -1,17 +1,16 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button *ngIf="id!=0"></ion-back-button>
-            <ion-menu-button *ngIf="id==0"></ion-menu-button>
+            <ion-back-button></ion-back-button>
+            <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title *ngIf="id==0 || id>max_mcqs_no">Level 2</ion-title>
-        <ion-title *ngIf="id!=0 && id<=max_mcqs_no">Question {{id}}</ion-title>
+        <ion-title slot="start" *ngIf="id==0 || id>max_mcqs_no">Level 2</ion-title>
+        <ion-title slot="start" *ngIf="id!=0 && id<=max_mcqs_no">Question {{id}}</ion-title>
+        <ion-title *ngIf="id>0 && id<=max_mcqs_no" slot="end">{{shared.min<=9?'0':''}}{{shared.min}}:{{shared.sec<=9?'0':''}}{{shared.sec}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-    <ion-label>{{timer}}</ion-label>
 
     <div *ngIf="id==0 && id<=max_mcqs_no" div>
         <ion-row>Now here you see different MCQ that will help you to Solve to Test you Knowledge ........</ion-row>
@@ -19,7 +18,7 @@
             <p>Click to start the Level </p>
         </ion-row>
 
-        <ion-button (click)="nextques(id)" expand="block">Start</ion-button>
+        <ion-button right (click)="nextques(id)" expand="block">Start</ion-button>
     </div>
 
     <div *ngIf="id!=0 && id<=max_mcqs_no">
@@ -37,8 +36,9 @@
             </ion-row>
 
             <ion-row>
-                <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
-                <ion-button (click)="nextques(id)" expand="block">Next</ion-button>
+                <ion-button left (click)="prevques()" expand="block">Prev</ion-button>
+                <ion-button right *ngIf="id<max_mcqs_no" (click)="nextques(id)" expand="block">Next</ion-button>
+                <ion-button right *ngIf="id==max_mcqs_no" (click)="nextques(id)" expand="block">Finish</ion-button>
             </ion-row>
 
         </ion-grid>
@@ -49,13 +49,15 @@
 
         <ion-grid>
 
-            <ion-row style="margin:10px 0px;">You Have Completed All the MCQ</ion-row>
+            <ion-row style="margin:10px 0px;">Congratulations</ion-row>
+            <img src="../../assets/pngwing.com.png">
+            <ion-row>You have successfully completed Level 2</ion-row>
             <ion-row style="margin:20px 0px; font-weight: bold;"> Your Score is {{shared.mcq_score}}</ion-row>
-            <ion-row style="margin:20px 0px;">Proceed to Level 3</ion-row>
+            
+            <ion-row style="margin:20px 0px;">Now , Proceed to Level 3 for more Fun</ion-row>
             <ion-row>
-                <ion-button (click)="openpage()" expand="block">Level 3</ion-button>
+                <ion-button right (click)="openpage()" expand="block">Level 3</ion-button>
             </ion-row>
-
         </ion-grid>
 
     </div>

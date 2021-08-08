@@ -85,7 +85,7 @@ export class Level1Page implements OnInit {
       })
   }
   openpage(){
-    this.navCtrl.navigateForward('level2');
+    this.navCtrl.navigateRoot('level2');
   }
 
 }

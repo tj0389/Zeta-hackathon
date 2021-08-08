@@ -18,7 +18,7 @@
             <p> Click to start the Level </p>
         </ion-row>
 
-        <ion-button (click)="nextques(id)" expand="block">Start</ion-button>
+        <ion-button right (click)="nextques(id)" expand="block">Start</ion-button>
     </div>
 
     <div *ngIf="id!=0 && id<=max_ques_no">
@@ -30,7 +30,7 @@
             </div>
             <ion-row>
                 <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
-                <ion-button [disabled]="flag" (click)="nextques(id)" expand="block">Next</ion-button>
+                <ion-button right [disabled]="flag" (click)="nextques(id)" expand="block">Next</ion-button>
             </ion-row>
 
         </ion-grid>
