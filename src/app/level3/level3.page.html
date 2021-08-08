@@ -8,6 +8,15 @@
 </ion-header>
 
 <ion-content>
+    <div class="timer">
+        <h4> Count down timer </h4>
+        <span id="days"> {{daysToDday}} </span>Day(s)
+        <span id="hours"> {{hoursToDday}} </span>Hrs 
+        <span id="minutes"> {{minutesToDday}} </span>Min
+        <span id="seconds"> {{secondsToDday}} </span>S
+    </div>
+
+    <ion-label>{{time}}</ion-label> 
     <div *ngIf="currentView == Instructions" div>
         <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
         <ion-row> Click to start the Level </ion-row>
