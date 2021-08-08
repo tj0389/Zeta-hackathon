@@ -1,4 +1,4 @@
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
@@ -14,7 +14,7 @@ export class Level1Page implements OnInit {
   max_ques_no:number=0;
   flag:boolean=true;
   
-  constructor(private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService,public router:ActivatedRoute) { 
+  constructor(public alertController : AlertController,private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService,public router:ActivatedRoute) { 
     
     this.id=JSON.parse(this.activatedRoute.snapshot.paramMap.get('id'));
     if (this.id==undefined || this.id==null)
@@ -34,9 +34,9 @@ export class Level1Page implements OnInit {
   }
 
   async fetch_qans(){
-    this.shared.qans=[{question:'question1',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
-      {question:'question2',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
-      {question:'question3',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
+    this.shared.qans=[{question:'Q1.',answer:'choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet.'},
+      {question:'Q2.',answer:'choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet.'},
+      {question:'Q3.',answer:'choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet.'},
     ];
     console.log(this.shared.qans);
   }
@@ -52,13 +52,38 @@ export class Level1Page implements OnInit {
   }
   
   async nextques(id:number){
+    console.log(id + ' ' + this.max_ques_no)
+    if(id == this.max_ques_no){
+      this.alertHandler()
+    }
+    else
     this.navCtrl.navigateForward(['level1',{id:id}])
   }
 
   prevques(){
     this.navCtrl.pop();
   }
-
+  alertHandler(){
+      this.alertController.create({
+        header : 'Congratutions!',
+        cssClass : 'alert',
+        message : `
+              <p>You Have read all the Content<p>
+              <img src="../../assets/pngwing.com.png">
+                 `,
+        buttons: [
+          {
+            text: 'Level 2',
+            cssClass : 'alertBtn',
+            handler: () => {
+              this.openpage()
+            }
+          }
+        ]
+      }).then((alert)=>{
+        alert.present()
+      })
+  }
   openpage(){
     this.navCtrl.navigateForward('level2');
   }

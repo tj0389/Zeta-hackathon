@@ -1,4 +1,4 @@
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
@@ -13,7 +13,7 @@ export class Level2Page implements OnInit {
   id:number;
   max_mcqs_no:number=0;
 
-  constructor(private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService) { 
+  constructor(public alertController : AlertController, private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService) { 
     
     if (shared.mcqs==null || shared.mcqs==undefined){
       this.fetch_mcqs();
@@ -78,6 +78,10 @@ export class Level2Page implements OnInit {
   }
   
   nextques(id:number){
+    if(id == this.max_mcqs_no){
+      this.alertHandler()
+    }
+    else
     this.navCtrl.navigateForward(['level2',{id:id}]);
   }
 
@@ -88,5 +92,25 @@ export class Level2Page implements OnInit {
   openpage(){
     this.navCtrl.navigateForward('level3');
   }
-
+  alertHandler(){
+    this.alertController.create({
+      header : 'Congratutions!',
+      cssClass : 'alert',
+      message : `
+            <p>You Have read all the Content<p>
+            <img src="../../assets/pngwing.com.png">
+               `,
+      buttons: [
+        {
+          text: 'Level 3',
+          cssClass : 'alertBtn',
+          handler: () => {
+            this.openpage()
+          }
+        }
+      ]
+    }).then((alert)=>{
+      alert.present()
+    })
+}
 }

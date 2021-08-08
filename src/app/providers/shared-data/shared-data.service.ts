@@ -20,9 +20,9 @@ export class SharedDataService {
   }
   
   async fetch_qans(){
-    this.qans=[{question:'question1',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
-      {question:'question2',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
-      {question:'question3',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
+    this.qans=[{question:'Ques1',answer:' choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet. For questions 16-20, solve the problem and enter your answer in the grid on the answer sheet. Please refer to the directions before question 16 on how to enter your answers in the grid. You may use any available space in your test booklet for scratch work.'},
+      {question:'Ques2',answer:' choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet. For questions 16-20, solve the problem and enter your answer in the grid on the answer sheet. Please refer to the directions before question 16 on how to enter your answers in the grid. You may use any available space in your test booklet for scratch work.'},
+      {question:'Ques3',answer:'choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet. For questions 16-20, solve the problem and enter your answer in the grid on the answer sheet. Please refer to the directions before question 16 on how to enter your answers in the grid. You may use any available space in your test booklet for scratch work.'},
       ];
   }
 

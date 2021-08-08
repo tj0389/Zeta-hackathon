@@ -39,3 +39,7 @@ h3 {
 .item:last-child>img {
     transform: scale(0.7);
 }
+
+ion-item {
+    width: 100% !important;
+}
