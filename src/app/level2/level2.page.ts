@@ -2,6 +2,8 @@ import { AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
+import { Subject,timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-level2',
@@ -12,6 +14,15 @@ export class Level2Page implements OnInit {
 
   id:number;
   max_mcqs_no:number=0;
+
+  destroy = new Subject();
+  showDialog = false;
+  timer: number;
+  dialog = 'stay logged in?';
+  notice = 'session expired';
+  showNotice = false;
+
+  rxjsTimer = timer(1000, 1000);
 
   constructor(public alertController : AlertController, private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService) { 
     
@@ -37,6 +48,19 @@ export class Level2Page implements OnInit {
   }
   
   ngOnInit() {
+    this.rxjsTimer.pipe(takeUntil(this.destroy)).subscribe(val => {
+      this.timer = val;
+
+      if (this.timer === 10) {
+        this.showDialog = true;
+      }
+
+      if (this.timer >= 20) {
+        this.destroy.next();
+        this.destroy.complete();
+        this.showNotice = true;
+      }
+    });
   }
 
   ionViewWillEnter(){
@@ -92,6 +116,7 @@ export class Level2Page implements OnInit {
   openpage(){
     this.navCtrl.navigateForward('level3');
   }
+  
   alertHandler(){
     this.alertController.create({
       header : 'Congratutions!',
