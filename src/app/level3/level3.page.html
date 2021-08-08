@@ -90,7 +90,7 @@
 
 
     <div *ngIf="currentView == inputOTP" div level3>
-        <ion-row>Otp is valid for 1 minute</ion-row>
+
 
         <ion-item>
             <ion-label position="floating">
@@ -101,7 +101,12 @@
             </ion-input>
         </ion-item>
         <ion-button (click)="checkOTP()" expand="block">submit otp</ion-button>
-        <center><small>Otp is Sent Successfully</small></center>
+        <center>
+            <div>
+                <small>Otp is Sent Successfully</small>
+            </div>
+            <small>00:{{time}}</small>
+        </center>
     </div>
 
 </ion-content>
