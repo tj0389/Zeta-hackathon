@@ -7,7 +7,7 @@ import { Platform } from '@ionic/angular';
 export class GlobalVarsService {
   public static website: string='https://www.dearsociety.in/';
   public static file_url: string='https://www.dearsociety.in/login/';
-  public static api_url: string='https://www.dearsociety.in/login/api/';
+  public static api_url: string ='https://arcane-coast-34652.herokuapp.com';
   public static softomatic_url: string='https://www.softomatic.tech/';
   public static k_file_url: string='https://softomatic.tech/karyarat_lumen_server/';
   public static k_api_url: string='https://softomatic.tech/karyarat_lumen_server/';

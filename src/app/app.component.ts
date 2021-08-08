@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
   public appPages = [
+    { title: 'Log In', url: '/login', icon: 'home' },
+    { title: 'sign up', url: '/signup', icon: 'home' },
     { title: 'Home', url: '/home', icon: 'home'},
     { title: 'Level1', url: '/level1', icon: 'home'},
     { title: 'Level2', url: '/level2', icon: 'home'},

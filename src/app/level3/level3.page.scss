@@ -1,0 +1,45 @@
+small {
+    color: var(--ion-color-danger);
+}
+
+.card {
+    margin: 10px;
+    padding: 10px;
+    background-image: url('https://media.istockphoto.com/videos/multicolored-motion-gradient-background-shades-of-gray-video-id1063727164?s=640x640');
+    background-position: 100% 100%;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+h3 {
+    text-align: center;
+}
+
+.container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.container>div {
+    margin-bottom: 10px;
+}
+
+.item {
+    width: 40%;
+}
+
+.item:last-child {
+    text-align: right;
+}
+
+.item:last-child>img {
+    transform: scale(0.7);
+}
+
+ion-item {
+    width: 100% !important;
+}

@@ -22,6 +22,14 @@ const routes: Routes = [
   {
     path: 'level3',
     loadChildren: () => import('./level3/level3.module').then( m => m.Level3PageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   }
 ];
 

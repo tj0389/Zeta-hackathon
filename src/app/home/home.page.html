@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
+    <ion-toolbar color="dark">
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
@@ -8,26 +8,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-grid>
-        <ion-row style="margin-top: 10px; font-weight: bold;">
-            Level 1 :
-        </ion-row>
-        <ion-row>
-            Read all the necessary questions and answers about the financial services or transaction you need to know.
-        </ion-row>
-        <ion-row style="margin-top: 10px; font-weight: bold;">
-            Level 2 :
-        </ion-row>
-        <ion-row>
-            Solve some MCQ
-        </ion-row>
-        <ion-row style="margin-top: 10px; font-weight: bold;">
-            Level 3 :
-        </ion-row>
-        <ion-row>
-            Run Simulation
-        </ion-row>
-    </ion-grid>
+  <ion-card class="card">
+    <ion-card-title><u>Level 1</u></ion-card-title>
+    <ion-card-content>
+      Read all the necessary questions and answers about the financial services or transaction you need to know.
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="card">
+    <ion-card-title><u>Level 2</u></ion-card-title>
+    <ion-card-content>
+      Solve some MCQ'S
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="card">
+    <ion-card-title><u>Level 3</u></ion-card-title>
+    <ion-card-content>
+      Run Simulation.
+    </ion-card-content>
+  </ion-card>
 
-    <ion-button (click)="openpage()" expand="block" btn>Start</ion-button>
+  <ion-button (click)="openpage()" expand="block" btn>Start</ion-button>
 </ion-content>

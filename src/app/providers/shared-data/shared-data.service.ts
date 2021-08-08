@@ -1,43 +1,62 @@
 import { Injectable } from '@angular/core';
+import { User } from '../../interfaces/User';
+
+
 @Injectable({
   providedIn: 'root'
 })
 
+
 export class SharedDataService {
 
+  user: User = {
+    isLogin:false,
+    firstName: '',
+    lastName: '',
+    email: '',
+    userType: '',
+    mobile: 0,
+    childrenId: []
+  };
 
-  qans;
-  mcqs;
+
+  cardNumber = "1020 3949 4893 3983";
+  cvv = 100;
+  balance = 1000;
+
+  mcq_score:number=0;
+  mcq_score_count;
+
+  qans=null;
+  mcqs=null;
+  is_checked=[];
+
+
   constructor() {
-   this.fetch_qans();
-   this.fetch_mcqs();
+    this.user.isLogin = false;
+
+ //   let obj = new user();
+   // console.log(this.user);
+    //this.user.isLogin = false;
+    //this.user.mobile = 9520468506;
   }
   
   async fetch_qans(){
-    this.qans=[{question:'question1',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
-      {question:'question2',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
-      {question:'question3',answer:'answer answeranswer answer answeranswer answer answer answer answer answer'},
+    this.qans=[{question:'Ques1',answer:' choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet. For questions 16-20, solve the problem and enter your answer in the grid on the answer sheet. Please refer to the directions before question 16 on how to enter your answers in the grid. You may use any available space in your test booklet for scratch work.'},
+      {question:'Ques2',answer:' choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet. For questions 16-20, solve the problem and enter your answer in the grid on the answer sheet. Please refer to the directions before question 16 on how to enter your answers in the grid. You may use any available space in your test booklet for scratch work.'},
+      {question:'Ques3',answer:'choose the best answer from the choices provided, and fill in the corresponding circle on your answer sheet. For questions 16-20, solve the problem and enter your answer in the grid on the answer sheet. Please refer to the directions before question 16 on how to enter your answers in the grid. You may use any available space in your test booklet for scratch work.'},
       ];
-    // this.authService.getData('fetch_language').then(async (result) =>  {
-    //   if(result['status']=='success')
-    //   {
-    //       this.language=result['language'];
-    //       this.faq_lang_id=1;
-    //       this.byelaws_lang_id=1;
-    //       this.news_lang_id=1;
-    //   }
-    // },async (err) => {
-    //   console.log(err);
-    // });
   }
+
   async fetch_mcqs(){
     this.mcqs=[{question:'question1',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     {question:'question2',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     {question:'question3',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     {question:'question4',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
     ];
-  console.log(this.qans);
   }
+
+
   
 //   isRootUrl() {
 //     if (this.router.url == '/tab/dashboard') return true

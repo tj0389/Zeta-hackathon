@@ -1,5 +1,6 @@
 <ion-header>
-    <ion-toolbar>
+
+    <ion-toolbar color="dark">
         <ion-buttons slot="start">
             <ion-back-button *ngIf="id!=0"></ion-back-button>
             <ion-menu-button *ngIf="id==0"></ion-menu-button>
@@ -13,7 +14,9 @@
 
     <div *ngIf="id==0 && id<=max_ques_no" div>
         <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
-        <ion-row> Click to start the Level </ion-row>
+        <ion-row>
+            <p> Click to start the Level </p>
+        </ion-row>
 
         <ion-button (click)="nextques(id)" expand="block">Start</ion-button>
     </div>
@@ -21,25 +24,25 @@
     <div *ngIf="id!=0 && id<=max_ques_no">
 
         <ion-grid>
-
-            <ion-row style="margin:10px 0px; font-weight: bold;">{{shared.qans[id-1].question}}</ion-row>
-            <ion-row> {{shared.qans[id-1].answer}}</ion-row>
-
+            <div div>
+                <span style="font-weight: bold;">{{shared.qans[id-1].question}}</span>
+                <span> {{shared.qans[id-1].answer}}</span>
+            </div>
             <ion-row>
-                <ion-button (click)="prevques()" expand="block">Prev</ion-button>
-                <ion-button (click)="nextques(id)" expand="block">Next</ion-button>
+                <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
+                <ion-button [disabled]="flag" (click)="nextques(id)" expand="block">Next</ion-button>
             </ion-row>
 
         </ion-grid>
 
     </div>
 
-    <div *ngIf="id>max_ques_no">
+    <!-- <div *ngIf="id>max_ques_no">
 
         <ion-grid style="text-align: center;">
 
-            <ion-row style="margin:10px 0px; font-weight: bold;">You Have read all the Content</ion-row>
-            <ion-row style="margin:10px 0px; font-weight: bold;font-size:20px;"> Congrts , You have completed Level 1 !! </ion-row>
+            <ion-row style="margin:10px 0px; font-weight: bold;"></ion-row>
+            <ion-row style="margin:10px 0px; font-weight: bold;font-size:20px;"> ! </ion-row>
 
             <ion-row>
                 <ion-button (click)="openpage()" expand="block">Level 2</ion-button>
@@ -47,6 +50,6 @@
 
         </ion-grid>
 
-    </div>
+    </div> -->
 
 </ion-content>
