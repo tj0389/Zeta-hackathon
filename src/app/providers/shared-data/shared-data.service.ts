@@ -3,7 +3,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 
+
+
 export class SharedDataService {
+
+ 
+  user: {
+    isLogin: boolean;
+    firstName: string;
+    lastName: string;
+    email: string;
+    userType: string;
+    mobile: number;
+    childrenId: Array<string>;
+  };
+  
 
   cardNumber = "1020 3949 4893 3983";
   cvv = 100;
@@ -17,6 +31,8 @@ export class SharedDataService {
   is_checked=[];
 
   constructor() {
+    this.user.isLogin = false;
+    this.user.mobile = 9520468506;
   }
   
   async fetch_qans(){

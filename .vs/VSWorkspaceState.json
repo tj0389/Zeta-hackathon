@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\level1",
+    "\\src\\app\\level3",
+    "\\src\\app\\providers",
+    "\\src\\app\\providers\\shared-data"
+  ],
+  "SelectedNode": "\\src\\app\\level3\\level3.page.ts",
+  "PreviewInSolutionExplorer": false
+}
