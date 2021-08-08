@@ -75,15 +75,15 @@ export class Level2Page implements OnInit {
       this.showsubmitpopup();
     }
     else{
-      if (this.id==0 && this.shared.is_timer==false){
-        this.shared.is_timer=true;
-        this.resettimer();
-        this.setTime();
+      if (this.id==0){
+        if (this.shared.is_timer==false){
+          this.shared.is_timer=true;
+          this.resettimer();
+          this.setTime();
+          this.menuCtrl.enable(false);
+        }
         this.navCtrl.navigateRoot(['level2',{id:id}]);
-        this.menuCtrl.enable(false);
       }
-      else if (this.id==0)
-        this.navCtrl.navigateRoot(['level2',{id:id}]);
       else
         this.navCtrl.navigateForward(['level2',{id:id}]);
     }
@@ -130,10 +130,9 @@ export class Level2Page implements OnInit {
     this.shared.mcq_score_count= new Array(this.shared.mcqs.length);
     this.shared.mcq_score_count.fill(0);
     this.alertController.create({
-      header : 'Congratutions!',
+      header : 'Congratulations!!',
       cssClass : 'alert',
-      message : `Your Score is `+this.shared.mcq_score+
-            `<img src="../../assets/pngwing.com.png">`,
+      message :`<img src="../../assets/pngwing.com.png">`,
     }).then(async (alert)=>{
       alert.present();
       await this.delay(2000);
@@ -146,17 +145,17 @@ export class Level2Page implements OnInit {
   }
 
   resettimer(){
-    this.shared.min=2;
-    this.shared.sec=0;
+    this.shared.min=0;
+    this.shared.sec=30;
   }
-
+  
   stoptimer(){
     this.shared.is_timer=false;
   }
-
+  
   timefinished(){
     this.alertController.create({
-      header : 'Time Finished',
+      header : `Time's Up`,
       cssClass : 'modal-wrapper',
       message : `Your Test will be auto-submitted`,
     }).then(async (alert)=>{

@@ -10,7 +10,7 @@ import { SharedDataService } from '../providers/shared-data/shared-data.service'
 })
 export class homePage implements OnInit {
   public title: string;
-
+  
   constructor(private activatedRoute: ActivatedRoute,private navCtrl:NavController,public shared:SharedDataService) { }
 
   ngOnInit() {
@@ -18,7 +18,7 @@ export class homePage implements OnInit {
   }
 
   openpage(){
-    this.navCtrl.navigateForward('level1');
+    this.navCtrl.navigateRoot('level1');
   }
 
 }

@@ -12,44 +12,37 @@
 
 <ion-content>
 
-    <div *ngIf="id==0 && id<=max_ques_no" div>
+    <ion-grid *ngIf="id==0 && id<=max_ques_no">
         <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
         <ion-row>
             <p> Click to start the Level </p>
         </ion-row>
 
         <ion-button right (click)="nextques(id)" expand="block">Start</ion-button>
-    </div>
+    </ion-grid>
 
-    <div *ngIf="id!=0 && id<=max_ques_no">
+    <ion-grid *ngIf="id!=0 && id<=max_ques_no">
+        <div div>
+            <span style="font-weight: bold;">{{shared.qans[id-1].question}}</span>
+            <span> {{shared.qans[id-1].answer}}</span>
+        </div>
+        <ion-row>
+            <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
+            <ion-button right [disabled]="flag" *ngIf="id<max_ques_no" (click)="nextques(id)" expand="block">Next</ion-button>
+            <ion-button right [disabled]="flag" *ngIf="id==max_ques_no" (click)="nextques(id)" expand="block">Finish</ion-button>
+        </ion-row>
 
-        <ion-grid>
-            <div div>
-                <span style="font-weight: bold;">{{shared.qans[id-1].question}}</span>
-                <span> {{shared.qans[id-1].answer}}</span>
-            </div>
-            <ion-row>
-                <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
-                <ion-button right [disabled]="flag" (click)="nextques(id)" expand="block">Next</ion-button>
-            </ion-row>
+    </ion-grid>
 
-        </ion-grid>
+    <ion-grid *ngIf="id>max_ques_no">
 
-    </div>
-
-    <!-- <div *ngIf="id>max_ques_no">
-
-        <ion-grid style="text-align: center;">
-
-            <ion-row style="margin:10px 0px; font-weight: bold;"></ion-row>
-            <ion-row style="margin:10px 0px; font-weight: bold;font-size:20px;"> ! </ion-row>
-
-            <ion-row>
-                <ion-button (click)="openpage()" expand="block">Level 2</ion-button>
-            </ion-row>
-
-        </ion-grid>
-
-    </div> -->
+        <img class="congrts" src="../../assets/pngwing.com.png" height="200px" width="200px">
+        <ion-row center style="margin:20px 0px; font-size: 16px;"> You have successfully completed Level 1</ion-row>
+        <!-- <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Score is {{shared.mcq_score}}</ion-row> -->
+        <ion-row center style="margin:20px 0px;">Now , Proceed to Level 2 for more Fun</ion-row>
+        <ion-row>
+            <ion-button right (click)="openpage()" expand="block">Level 2</ion-button>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>
