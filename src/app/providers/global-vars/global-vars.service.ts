@@ -4,32 +4,23 @@ import { Platform } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
+
 export class GlobalVarsService {
-  public static website: string='https://www.dearsociety.in/';
-  public static file_url: string='https://www.dearsociety.in/login/';
-  public static api_url: string ='https://arcane-coast-34652.herokuapp.com';
-  public static softomatic_url: string='https://www.softomatic.tech/';
-  public static k_file_url: string='https://softomatic.tech/karyarat_lumen_server/';
-  public static k_api_url: string='https://softomatic.tech/karyarat_lumen_server/';
-  public static appurl : string='https://play.google.com/store/apps/details?id=app.softomatic.dearsociety';
- // public static appversion : string="1.0.8";
+  public static file_url: string='https://karyarat2.0.dearsociety.in/';
+  public static api_url: string ='https://arcane-coast-34652.herokuapp.com/';
+  public static appurl : string;
+  public static appversion : string="1.0.8";
   constructor(public platform : Platform) {
     if(this.platform.is('ios'))
     {
-      GlobalVarsService.appurl='https://apps.apple.com/in/app/dear-society/id1460446829';
+       //GlobalVarsService.appurl='https://apps.apple.com/in/app/dear-society/id1460446829';
     }
     if(this.platform.is('android'))
     {
-      GlobalVarsService.appurl='https://play.google.com/store/apps/details?id=app.softomatic.dearsociety';
+       GlobalVarsService.appurl='https://play.google.com/store/apps/details?id=app.softomatic.karyarat';
     }
-    GlobalVarsService.file_url='https://www.dearsociety.in/login/';
-    GlobalVarsService.api_url='https://www.dearsociety.in/login/api/';
-    GlobalVarsService.softomatic_url='https://www.softomatic.tech/';
-
-    GlobalVarsService.k_file_url='https://softomatic.tech/karyarat_lumen_server/';
-    GlobalVarsService.k_api_url='https://softomatic.tech/karyarat_lumen_server/';
-
-   //  GlobalVarsService.packagename="app.softomatic.dearsociety";
+    GlobalVarsService.file_url='https://karyarat2.0.dearsociety.in/';
+    GlobalVarsService.api_url='https://arcane-coast-34652.herokuapp.com/';
   }
 
   public static check_mobile_number(number)

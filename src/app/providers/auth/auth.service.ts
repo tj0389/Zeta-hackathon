@@ -1,77 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from  '@angular/common/http';
+import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { GlobalVarsService } from '../global-vars/global-vars.service';
+import { NavController } from '@ionic/angular';
 
 let appUrl = GlobalVarsService.api_url;
-let key = '$2y$10$nltmJ89a/ARdkKrZLtu1Q.8hnm4M0TRaLC6Y9gDF1V.YDlJ16/rG.';
-let kAppUrl = GlobalVarsService.k_api_url;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(public http: HttpClient) {
-    // 
-  }
-
-  KarPostData(credentials,type){
-    return new Promise((resolve, reject)=>{
-      let headers = 
-      {
-      'accept':'application/json',
-      'Content-Type':'application/json'}
-
-      this.http.post(kAppUrl+type,credentials,{headers: headers}).subscribe(res =>{
-        resolve(res);
-      }, (err)=>{
-        reject(err);
-      });
-    });
-  }
-
-  KarGetData(type)
-  {
-    return new Promise((resolve, reject)=>{
-      let headers = 
-      {
-      'accept':'application/json',
-      'Content-Type':'application/json'}
-      this.http.get(kAppUrl+type,{headers: headers}).subscribe(res =>{
-        resolve(res);
-      }, (err)=>{
-        reject(err);
-      });
-    });
+  constructor(public http: HttpClient, public navCtrl: NavController) {
+    //
   }
 
   postData(credentials, type)
   {
-    return new Promise((resolve, reject)=>{
-      let headers = 
-      {'key':key,
-      'accept':'application/json',
-      'Content-Type':'application/json'}
-
-      this.http.post(appUrl+type,credentials,{headers: headers}).subscribe(res =>{
-        resolve(res);
-      }, (err)=>{
-        reject(err);
+      return new Promise((resolve, reject)=>{
+        const headers = new HttpHeaders();
+        headers.append('Access-Control-Allow-Headers', 'Content-Type');
+        headers.append('Access-Control-Allow-Methods', 'POST');
+        headers.append('Access-Control-Allow-Origin', '*');
+        this.http.post(appUrl+type,credentials,{ headers:headers }).subscribe(res =>{
+          resolve(res);
+        }, (err)=>{
+          console.log('inside error');
+          reject(err);
+        });
       });
-    });
   }
-
+  
   getData(type)
   {
-    return new Promise((resolve, reject)=>{
-      let headers = 
-      {'key':key,
-      'accept':'application/json',
-      'Content-Type':'application/json'}
-      this.http.get(appUrl+type,{headers: headers}).subscribe(res =>{
-        resolve(res);
-      }, (err)=>{
-        reject(err);
+      return new Promise((resolve, reject)=>{
+      const headers = new HttpHeaders();
+        this.http.get(appUrl+type,{ headers }).subscribe(res =>{
+          resolve(res);
+        }, (err)=>{
+          console.log('inside error');
+          reject(err);
+        });
       });
-    });
   }
 }

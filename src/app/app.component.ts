@@ -9,18 +9,25 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
   public appPages = [
-    { title: 'Log In', url: '/login', icon: 'home' },
-    { title: 'sign up', url: '/signup', icon: 'home' },
     { title: 'Home', url: '/home', icon: 'home'},
     { title: 'Level1', url: '/level1', icon: 'home'},
     { title: 'Level2', url: '/level2', icon: 'home'},
     { title: 'Level3', url: '/level3', icon: 'home'},
   ];
+
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private navCtrl:NavController) {}
   
   async ngOnInit() {
-    this.navCtrl.navigateRoot(['home']);
+    let val=localStorage.getItem('email');
+    let usertype=localStorage.getItem('userType');
+    console.log(val,usertype);
+    if(val=='' || val==null || val==undefined)
+      this.navCtrl.navigateRoot(['login']);
+    else
+    {
+      this.navCtrl.navigateRoot(['home']);        
+    }
   }
   
   getdirection(index){

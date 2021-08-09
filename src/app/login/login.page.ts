@@ -1,7 +1,6 @@
-import { AlertController, NavController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SharedDataService } from '../providers/shared-data/shared-data.service';
+import { AuthService } from '../providers/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +9,83 @@ import { SharedDataService } from '../providers/shared-data/shared-data.service'
 })
 export class LoginPage implements OnInit {
 
-  constructor(private navCtrl: NavController) { }
+  email;
+  password;
+  loading: HTMLIonLoadingElement;
+
+  constructor(private navCtrl: NavController,private authService:AuthService,public alertCtrl:AlertController,public loadingCtrl:LoadingController) {
+    this.email=localStorage.getItem('email');
+    this.password=localStorage.getItem('password');
+  }
 
   ngOnInit() {
   }
+  
+  async logIn() {
+    // let val=localStorage.getItem('email');
+    // if (val==null || val==undefined || val==''){
+    //   const alert = await this.alertCtrl.create({
+    //   header: 'Alert!',
+    //   message: 'Please Signup First',
+    //   buttons:  [{
+    //     text: 'Sign Up',
+    //     handler: () => {
+    //       this.navCtrl.navigateRoot('signup');
+    //     }
+    //   }]});
+    //   await alert.present();
+    //   setTimeout(()=>{},2000);
+    //   alert.dismiss();
+    // }
+    // else{
 
-  logIn() {
+    // }
 
+    let data = {email: this.email,password: this.password};
+    this.showLoader();
+    this.authService.postData(data, 'verifyUser').then(async (result) => {
+      console.log(result);
+      await this.loading.dismiss();
+      if (result['status'] == 'success') {
+        result['data'].forEach((value,key) => {
+        localStorage.setItem(key,value);
+        });
+        this.navCtrl.navigateRoot('home');
+      }
+      else{
+        const alert = await this.alertCtrl.create({
+        header: 'Error',
+        message: result['msg'],
+        buttons: ['OK'],
+        });
+        await alert.present();
+        setTimeout(()=>{},2000);
+        alert.dismiss();
+      }
+    },async (err) => {
+      await this.loading.dismiss();
+      console.log(err);
+      const alert = await this.alertCtrl.create({
+        header: 'Error',
+        message: 'Something went wrong. Try again later',
+        buttons: ['OK'],
+      });
+      await alert.present();
+      setTimeout(()=>{},2000);
+      alert.dismiss();
+    });
   }
 
   signUp() {
-    this.navCtrl.navigateForward('signup');
+    this.navCtrl.navigateRoot('signup');
+  }
+
+  async showLoader(){
+    this.loading = await this.loadingCtrl.create({
+        message: 'Loading..',
+        duration: 10000,
+    });
+    await this.loading.present();
   }
 
 }

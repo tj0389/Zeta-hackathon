@@ -131,7 +131,7 @@ export class Level2Page implements OnInit {
     this.shared.mcq_score_count.fill(0);
     this.alertController.create({
       header : 'Congratulations!!',
-      cssClass : 'alert',
+      cssClass : 'custom-wrapper',
       message :`<img src="../../assets/pngwing.com.png">`,
     }).then(async (alert)=>{
       alert.present();

@@ -65,7 +65,7 @@ export class Level1Page implements OnInit {
   alertHandler(){
       this.alertController.create({
       header : 'Congratulations!!',
-      cssClass : 'alert',
+      cssClass : 'custom-wrapper',
       message :`<img src="../../assets/pngwing.com.png">`,
     }).then(async (alert)=>{
       alert.present();
