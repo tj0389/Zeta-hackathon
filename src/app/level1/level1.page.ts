@@ -52,40 +52,30 @@ export class Level1Page implements OnInit {
   }
   
   async nextques(id:number){
-    console.log(id + ' ' + this.max_ques_no)
     if(id == this.max_ques_no){
       this.alertHandler()
     }
-    else
     this.navCtrl.navigateForward(['level1',{id:id}])
   }
 
   prevques(){
     this.navCtrl.pop();
   }
+
   alertHandler(){
       this.alertController.create({
-        header : 'Congratutions!',
-        cssClass : 'alert',
-        message : `
-              <p>You Have read all the Content<p>
-              <img src="../../assets/pngwing.com.png">
-                 `,
-        buttons: [
-          {
-            text: 'Level 2',
-            cssClass : 'alertBtn',
-            handler: () => {
-              this.openpage()
-            }
-          }
-        ]
-      }).then((alert)=>{
-        alert.present()
-      })
+      header : 'Congratulations!!',
+      cssClass : 'alert',
+      message :`<img src="../../assets/pngwing.com.png">`,
+    }).then(async (alert)=>{
+      alert.present();
+      await this.delay(2000);
+      alert.dismiss();
+    })
   }
+
   openpage(){
-    this.navCtrl.navigateForward('level2');
+    this.navCtrl.navigateRoot('level2');
   }
 
 }

@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
-import { timer } from 'rxjs';
-
-
-
 
 @Component({
   selector: 'app-level3',
@@ -12,7 +7,7 @@ import { timer } from 'rxjs';
   styleUrls: ['./level3.page.scss'],
 })
 export class Level3Page implements OnInit {
-  time : Number
+  time : number=15;
   currentView: number;
   Instructions = 0;
   showCardDetails = 1;
@@ -21,14 +16,8 @@ export class Level3Page implements OnInit {
   interval : any
   count = 0
 
-
-  ExpectedOTP: number;
-  ReceivedOTP: number;
-  
-
   constructor(public shared: SharedDataService) {
     this.currentView = this.Instructions;
-
   }
 
   ngOnInit() {
@@ -46,26 +35,21 @@ export class Level3Page implements OnInit {
 
   pay() {
     console.log("Payment is initiated!");
-
-    (async () => {
-      await this.sendOTPtoPhone();
-      this.currentView = this.inputOTP;
-      this.time = 59
-      this.setTime()
-    })();
-
-    
+    this.currentView = this.inputOTP;
+    this.setTime()
   }
 
-  async sendOTPtoPhone(){
-    this.ExpectedOTP = 12311;
-    
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
- 
   async setTime(){
-    //sarthak handle this situation.....
+    while(this.time>0){
+      await this.delay(1000);
+      this.time=this.time-1;
+    }
   }
+  
   checkOTP() {
     console.log("Verifying transaction!!");
     //this.currentView = this.inputOTP;
