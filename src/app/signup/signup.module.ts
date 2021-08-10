@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SignupPageRoutingModule } from './signup-routing.module';
-
+import { HttpClientModule } from '@angular/common/http';
 import { SignupPage } from './signup.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { SignupPage } from './signup.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     SignupPageRoutingModule
   ],
   declarations: [SignupPage]

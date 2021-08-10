@@ -46,6 +46,9 @@ export class AuthService {
 
   postData(credentials, type)
   {
+    console.log(credentials);
+    console.log(type);
+    return null;
     return new Promise((resolve, reject)=>{
       let headers = 
       {'key':key,
