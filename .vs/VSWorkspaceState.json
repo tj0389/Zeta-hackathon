@@ -3,11 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\level1",
-    "\\src\\app\\level3",
+    "\\src\\app\\home",
+    "\\src\\app\\level2",
     "\\src\\app\\providers",
-    "\\src\\app\\providers\\shared-data"
+    "\\src\\app\\providers\\auth",
+    "\\src\\app\\providers\\global-vars",
+    "\\src\\app\\providers\\previous-route",
+    "\\src\\app\\signup"
   ],
-  "SelectedNode": "\\src\\app\\level3\\level3.page.ts",
+  "SelectedNode": "\\src\\app\\home\\home.page.ts",
   "PreviewInSolutionExplorer": false
 }

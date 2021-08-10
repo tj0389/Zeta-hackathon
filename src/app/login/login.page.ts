@@ -1,6 +1,9 @@
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../providers/auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { SharedDataService } from '../providers/shared-data/shared-data.service';
+import { RestCallService } from '../rest-call.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +20,10 @@ export class LoginPage implements OnInit {
     this.email=localStorage.getItem('email');
     this.password=localStorage.getItem('password');
   }
+  email: string = "";
+  password: string = "";
+
+  constructor(private navCtrl: NavController, private restCallService: RestCallService) { }
 
   ngOnInit() {
   }
@@ -74,6 +81,15 @@ export class LoginPage implements OnInit {
       setTimeout(()=>{},2000);
       alert.dismiss();
     });
+    var data: any, res: any;
+    data = {
+      "email": this.email,
+      "password": this.password,
+    };
+    console.log("Request is ", data);
+    res = this.restCallService.postData(data, "verifyUser");
+    console.log(res); 
+
   }
 
   signUp() {

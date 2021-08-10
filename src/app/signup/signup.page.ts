@@ -3,7 +3,8 @@ import { AuthService } from './../providers/auth/auth.service';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { SharedDataService } from '../providers/shared-data/shared-data.service';
+import { RestCallService } from '../rest-call.service';
 
 @Component({
   selector: 'app-signup',
@@ -154,6 +155,9 @@ export class SignupPage implements OnInit {
         duration: 10000,
     });
     await this.loading.present();
+    // console.log("Request is ", data);
+    // res = this.restCallService.postData(data, "registerUser");
+    // console.log(res); 
   }
   
   changerole(type){
