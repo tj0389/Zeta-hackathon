@@ -47,7 +47,8 @@
         <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Score is {{shared.mcq_score}}</ion-row>
         <ion-row center style="margin:20px 0px;">Now , Proceed to Level 3 for more Fun</ion-row>
         <ion-row>
-            <ion-button right (click)="openpage()" expand="block">Level 3</ion-button>
+            <ion-button left (click)="openpage('level2')" expand="block">Re-Test</ion-button>
+            <ion-button right (click)="openpage('level3')" expand="block">Level 3</ion-button>
         </ion-row>
     </ion-grid>
 

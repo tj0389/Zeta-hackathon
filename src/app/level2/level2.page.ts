@@ -17,13 +17,13 @@ export class Level2Page implements OnInit {
   constructor(public alertController : AlertController, private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService,public menuCtrl:MenuController) { 
     
     if (shared.mcqs==null || shared.mcqs==undefined){
-      this.fetch_mcqs();
+      this.fetch_mcq();
     }
     if (shared.mcqs!=null && shared.mcqs!=undefined){
       this.max_mcqs_no=this.shared.mcqs.length;
     }
     this.id=JSON.parse(this.activatedRoute.snapshot.paramMap.get('id'));
-  
+    
     if (this.id==undefined || this.id==null)
       this.id=0;
     else{
@@ -40,14 +40,10 @@ export class Level2Page implements OnInit {
   ngOnInit() {
    
   }
-
-  async fetch_mcqs(){
-    this.shared.mcqs=[{question:'question1',option:['Haa','Bol','Saale'],answer:'Bol'},
-    {question:'question2',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
-    {question:'question3',option:['Haa','Mere'],answer:'Haa'},
-    {question:'question4',option:['Haa','Bol','Saale','Mere'],answer:'Bol'},
-    ];
-    console.log(this.shared.mcqs);
+  
+  async fetch_mcq(){
+    this.shared.original_mcqs=this.shared.shuffle(this.shared.original_mcqs);
+    this.shared.mcqs=this.shared.original_mcqs.slice(0,this.shared.max_mcq_level2);
     this.shared.is_checked = new Array(this.shared.mcqs.length);
     this.shared.mcq_score_count= new Array(this.shared.mcqs.length);
     this.shared.mcq_score_count.fill(0);
@@ -76,6 +72,7 @@ export class Level2Page implements OnInit {
     }
     else{
       if (this.id==0){
+        this.fetch_mcq();
         if (this.shared.is_timer==false){
           this.shared.is_timer=true;
           this.resettimer();
@@ -88,13 +85,13 @@ export class Level2Page implements OnInit {
         this.navCtrl.navigateForward(['level2',{id:id}]);
     }
   }
-
+  
   prevques(){
     this.navCtrl.pop();
   }
 
-  openpage(){
-    this.navCtrl.navigateRoot('level3');
+  openpage(page){
+    this.navCtrl.navigateRoot(page);
   }
 
   showsubmitpopup(){

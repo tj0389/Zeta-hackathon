@@ -1,0 +1,14 @@
+[
+    {
+        "question":"question1","option": ["Haa","Bol","Saale"],"answer":"Bol"
+    },
+    {
+        "question":"question2","option": ["Haa","Bol","Saale","Mere"],"answer":"Bol"
+    },
+    {
+        "question":"question3","option": ["Haa","Mere"],"answer":"Haa"
+    },
+    {
+        "question":"question4","option": ["Haa","Bol","Saale","Mere"],"answer":"Bol"
+    }
+]
