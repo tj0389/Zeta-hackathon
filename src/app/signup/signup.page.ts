@@ -2,9 +2,6 @@ import { GlobalVarsService } from './../providers/global-vars/global-vars.servic
 import { AuthService } from './../providers/auth/auth.service';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SharedDataService } from '../providers/shared-data/shared-data.service';
-import { RestCallService } from '../rest-call.service';
 
 @Component({
   selector: 'app-signup',
@@ -108,7 +105,6 @@ export class SignupPage implements OnInit {
         this.signin();
       }
     }
-    // this.signin();
   }
   
   signin(){
@@ -118,16 +114,16 @@ export class SignupPage implements OnInit {
       console.log(result);
       await this.loading.dismiss();
       if (result['status'] == 'success') {
-        result['data'].forEach((value,key) => {
-          localStorage.setItem(key,value);
-        });
+        // result['data'].forEach((value,key) => {
+        //   localStorage.setItem(key,value);
+        // });
         this.navCtrl.navigateRoot('login');
       }
       else
       {
         const alert = await this.alertCtrl.create({
           header: 'Error',
-          message: result['msg'],
+          message: result['message'],
           buttons: ['OK'],
         });
         await alert.present();

@@ -1,9 +1,6 @@
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../providers/auth/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { SharedDataService } from '../providers/shared-data/shared-data.service';
-import { RestCallService } from '../rest-call.service';
 
 @Component({
   selector: 'app-login',
@@ -16,14 +13,10 @@ export class LoginPage implements OnInit {
   password;
   loading: HTMLIonLoadingElement;
 
-  constructor(private navCtrl: NavController,private authService:AuthService,public alertCtrl:AlertController,public loadingCtrl:LoadingController) {
+  constructor(private navCtrl: NavController,private authService:AuthService,public alertCtrl:AlertController,public    loadingCtrl:LoadingController) {
     this.email=localStorage.getItem('email');
     this.password=localStorage.getItem('password');
   }
-  email: string = "";
-  password: string = "";
-
-  constructor(private navCtrl: NavController, private restCallService: RestCallService) { }
 
   ngOnInit() {
   }
@@ -47,22 +40,22 @@ export class LoginPage implements OnInit {
     // else{
 
     // }
-
+    
     let data = {email: this.email,password: this.password};
     this.showLoader();
     this.authService.postData(data, 'verifyUser').then(async (result) => {
       console.log(result);
       await this.loading.dismiss();
       if (result['status'] == 'success') {
-        result['data'].forEach((value,key) => {
-        localStorage.setItem(key,value);
-        });
+        // obj.forEach((value,key) => {
+        //   localStorage.setItem(key,value);
+        // });
         this.navCtrl.navigateRoot('home');
       }
       else{
         const alert = await this.alertCtrl.create({
         header: 'Error',
-        message: result['msg'],
+        message: result['message'],
         buttons: ['OK'],
         });
         await alert.present();
@@ -81,14 +74,6 @@ export class LoginPage implements OnInit {
       setTimeout(()=>{},2000);
       alert.dismiss();
     });
-    var data: any, res: any;
-    data = {
-      "email": this.email,
-      "password": this.password,
-    };
-    console.log("Request is ", data);
-    res = this.restCallService.postData(data, "verifyUser");
-    console.log(res); 
 
   }
 

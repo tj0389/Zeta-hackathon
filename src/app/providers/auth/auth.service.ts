@@ -5,7 +5,6 @@ import { NavController } from '@ionic/angular';
 
 let appUrl = GlobalVarsService.api_url;
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,32 +13,41 @@ export class AuthService {
     //
   }
 
-  postData(credentials, type)
-  {
-      return new Promise((resolve, reject)=>{
-        const headers = new HttpHeaders();
-        headers.append('Access-Control-Allow-Headers', 'Content-Type');
-        headers.append('Access-Control-Allow-Methods', 'POST');
-        headers.append('Access-Control-Allow-Origin', '*');
-        this.http.post(appUrl+type,credentials,{ headers:headers }).subscribe(res =>{
-          resolve(res);
-        }, (err)=>{
-          console.log('inside error');
-          reject(err);
-        });
+  getData(req) {
+    let customHeaders = {
+      'Content-Type': 'application/json',
+      'key': ""
+    };
+    const httpOptions = {
+      headers: new HttpHeaders(customHeaders)
+    };
+
+    return new Promise(resolve => {
+      this.http.get(appUrl + req, httpOptions).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log("Error : " + req);
+        console.log(err);
       });
+
+    });
   }
   
-  getData(type)
-  {
-      return new Promise((resolve, reject)=>{
-      const headers = new HttpHeaders();
-        this.http.get(appUrl+type,{ headers }).subscribe(res =>{
-          resolve(res);
-        }, (err)=>{
-          console.log('inside error');
-          reject(err);
-        });
+  postData(data, req) {
+    let customHeaders = {
+      'Content-Type': 'application/json'
+    };
+    const httpOptions = {
+      headers: new HttpHeaders(customHeaders)
+    };
+
+    return new Promise(resolve => {
+      this.http.post(appUrl + req, data, httpOptions).subscribe((data: any) => {
+        resolve(data);
+      }, (err) => {
+        console.log("Error : " + req);
+        console.log(err);
       });
+    });
   }
 }
