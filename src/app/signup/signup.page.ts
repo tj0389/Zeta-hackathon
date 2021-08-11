@@ -1,7 +1,8 @@
 import { GlobalVarsService } from './../providers/global-vars/global-vars.service';
 import { AuthService } from './../providers/auth/auth.service';
-import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from '../providers/shared-data/shared-data.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 export class SignupPage implements OnInit {
   loading: any;
 
-  constructor(private navCtrl: NavController,private authService:AuthService,public alertCtrl:AlertController,public loadingCtrl:LoadingController) { }
+  constructor(private navCtrl: NavController,private authService:AuthService,public alertCtrl:AlertController,public loadingCtrl:LoadingController,public shared:SharedDataService,public menuCtrl:MenuController) { 
+    this.menuCtrl.enable(false);
+  }
 
   firstName: string;
   lastName: string;
@@ -22,12 +25,8 @@ export class SignupPage implements OnInit {
   child;
   flag:boolean=false;
   userType:number=2;
-
+  
   ngOnInit() {
-  }
-
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   isEmpty(){
@@ -57,7 +56,7 @@ export class SignupPage implements OnInit {
         buttons: ['Ok']
       }).then(async (alert)=>{
         alert.present();
-        await this.delay(2000);
+        await this.shared.delay(2000);
         alert.dismiss();
       })
     }
@@ -73,7 +72,7 @@ export class SignupPage implements OnInit {
           buttons: ['Ok']
         }).then(async (alert)=>{
           alert.present();
-          await this.delay(2000);
+          await this.shared.delay(2000);
           alert.dismiss();
         })
       }
@@ -85,7 +84,7 @@ export class SignupPage implements OnInit {
           buttons: ['Ok']
         }).then(async (alert)=>{
           alert.present();
-          await this.delay(2000);
+          await this.shared.delay(2000);
           alert.dismiss();
         })
       }
@@ -97,7 +96,7 @@ export class SignupPage implements OnInit {
           buttons: ['Ok']
         }).then(async (alert)=>{
           alert.present();
-          await this.delay(2000);
+          await this.shared.delay(2000);
           alert.dismiss();
         })
       }
@@ -108,16 +107,16 @@ export class SignupPage implements OnInit {
   }
   
   signin(){
-    let data = { firstName: this.firstName,lastName: this.lastName,email: this.email,mobile:this.mobile,userType: this.userType,password: this.password,childrenId: this.child};
+    let arr=this.child.split(',');
+    let data = { firstName: this.firstName,lastName: this.lastName,email: this.email,mobile:this.mobile,userType: this.userType,password: this.password,childrenId: arr};
     this.showLoader();
     this.authService.postData(data, 'registerUser').then(async (result) => {
       console.log(result);
       await this.loading.dismiss();
       if (result['status'] == 'success') {
-        // result['data'].forEach((value,key) => {
-        //   localStorage.setItem(key,value);
-        // });
+        this.menuCtrl.enable(true);
         this.navCtrl.navigateRoot('login');
+        console.log(this.shared.user);
       }
       else
       {
@@ -127,7 +126,7 @@ export class SignupPage implements OnInit {
           buttons: ['OK'],
         });
         await alert.present();
-        await this.delay(2000);
+        await this.shared.delay(2000);
         alert.dismiss();
       }
     },async (err) => {
@@ -140,7 +139,7 @@ export class SignupPage implements OnInit {
       });
       this.password="";
       await alert.present();
-      await this.delay(2000);
+      await this.shared.delay(2000);
       alert.dismiss();
     });
   }
@@ -148,7 +147,7 @@ export class SignupPage implements OnInit {
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
         message: 'Loading..',
-        duration: 10000,
+        duration: 20000,
     });
     await this.loading.present();
     // console.log("Request is ", data);

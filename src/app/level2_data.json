@@ -1,14 +1,28 @@
 [
-    {
-        "question":"question1","option": ["Haa","Bol","Saale"],"answer":"Bol"
-    },
-    {
-        "question":"question2","option": ["Haa","Bol","Saale","Mere"],"answer":"Bol"
-    },
-    {
-        "question":"question3","option": ["Haa","Mere"],"answer":"Haa"
-    },
-    {
-        "question":"question4","option": ["Haa","Bol","Saale","Mere"],"answer":"Bol"
-    }
-]
+    {"question":"A budget can be made by:","option":["keeping a diary of your expenses","copying your friend’s budget."," deciding what to buy when you go to the store.","checking how much money is in your pocket"],"answer":"keeping a diary of your expenses","type":"budget making"},
+    {"question":"Which of these is not a reason to budget?","option":["To put you in control of your money.","To determine how much money you have to spend.","To increase your income.","To decrease your impulse spending."],"answer":"To increase your income.","type":"budget making"},
+    {"question":"Which one of these is not part of a personal budget?","option":["Savings","Giving to a church or charity","Overspending","Income"],"answer":"Overspending","type":"budget making"},
+    {"question":"A budget helps you to","option":["buy everything you want","balance your income with your expenses.","overspend.","earn more money."],"answer":"balance your income with your expenses","type":"budget making"},
+    {"question":"Is budget helpful?","option":["sometime","never","always","depend on your income "],"answer":"always","type":"budget making"},
+    {"question":"Saving money means giving up the opportunity cost to","option":["apply for credit card","spend in the present","save money","have money in future"],"answer":"spend in the present","type":"saving"},
+    {"question":" Account payee cheques can be paid","option":["At cash counter of Bank","At ATM","By deposit in Bank account","None of above"],"answer":"By deposit in Bank account","type":"banking"},
+    {"question":"Bank provides loans for","option":["Home","Car","Education","All of above"],"answer":"All of above","type":"banking"},
+    {"question":"Bank does not give loan against","option":["Gold","Home","Lottery Ticket","All of above"],"answer":"Lottery Ticket","type":"banking"},
+    {"question":"Timely repayment of loans results","option":["Good reputations","No tension","Easily availability of loan in future","All of above"],"answer":"All of above","type":"banking"},
+    {"question":"You get a text message from a vendor who asks you to click on a link to renew your password so that you can log in to its website. You should:","option":[" Reply to the text to confirm that you really need to renew your password.","Click on the link. If it takes you to the vendor’s website, then you’ll know it’s not a scam.","Pick up the phone and call the vendor, using a phone number you know to be correct, to confirm that the request is real.","Avoid text"],"answer":"Pick up the phone and call the vendor, using a phone number you know to be correct, to confirm that the request is real.","type":"fraudery"},
+    {"question":" If you fall for a phishing scam, what should you do to limit the damage?","option":["Delete the phishing email.","Unplug the computer. This will get rid of any malware.","none","Change any compromised passwords."],"answer":"Change any compromised passwords.","type":"fraudery"},
+    {"question":"Which of these businesses suffered the biggest data breach of all time, putting billions of its customers’ sensitive data at risk?","option":["Marriott International","Yahoo.com","Adult Friend Finder","a dating site Equifax"],"answer":"Yahoo.com","type":"fraudery"},
+    {"question":"The Federal Trade Commission (FTC) examined fraud reports in 2019 and found most often criminals first contacted victims by:","option":["calling them on phone","Visiting them at their residence","Sending an email","Sending a letter in the mail"],"answer":"calling them on phone","type":"fraudery"},
+    {"question":"Credit cards offer consumers better protection against liability for fraudulent purchases compared with debit cards because of the:","option":["Electronic Fund Transfer Act","Federal Reserve Bank’s Regulation E","Fair Credit Billing Act","none"],"answer":"Fair Credit Billing Act","type":"fraudery"},
+    {"question":"Money is a Medium of","option":["communication","exchange","barter","spectulations "],"answer":"exchange","type":"money"},
+    {"question":" Money contains:","option":["coins","cheque","currency notes","All of above"],"answer":"All of above","type":"money"},
+    {"question":"Who is the monetary authority in India?","option":["RBI","Cetral bank","Ministry of Finance","cabinet"],"answer":"RBI","type":"money"},
+    {"question":"What solves the problem of double coincidence of wants?","option":["Goods","Banks","Money","All of the above"],"answer":"Money","type":"money"},
+    {"question":"Money helps man to …………….. his wants","option":["multiply","satisfy","create","None of the above"],"answer":"satisfy","type":"money"},
+    {"question":"Savings is directly connected with ……………….","option":["consumption","production","investment","None of the above"],"answer":"investment","type":"money"},
+    {"question":" What does it mean to have a negative savings rate?","option":["spending more money than you make and acquiring debt.","no saving","huge amount of saving","All of above"],"answer":"spending more money than you make and acquiring debt.","type":"money"},
+    {"question":"For which of the following should you save?","option":["emergency","wealth building","purchase","All of above"],"answer":"All of above","type":"money"},
+    {"question":"Which of these is NOT a key to saving money?","option":["Making Saving Habit","Focus","Income","Discipline"],"answer":"Income","type":"money"},
+    {"question":"Interest paid on interest previously earned","option":["simple interest","compound interest","Both of A & B ","none"],"answer":"compound interest","type":"money"}
+    
+    ]

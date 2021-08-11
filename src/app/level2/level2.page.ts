@@ -142,8 +142,8 @@ export class Level2Page implements OnInit {
   }
 
   resettimer(){
-    this.shared.min=0;
-    this.shared.sec=30;
+    this.shared.min=this.shared.level2_time_min;
+    this.shared.sec=this.shared.level2_time_sec;
   }
   
   stoptimer(){
