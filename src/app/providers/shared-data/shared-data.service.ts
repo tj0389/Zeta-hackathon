@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import * as level2_data from "../../level2_data.json";
 import * as level1_data from "../../level1_data.json";
@@ -18,16 +19,20 @@ export class SharedDataService {
     childrenId: Array(0),
   };
   
+  current_level=0;
+  
   //level 1
   passage=null;
-  passage_score_count;
-  passage_score:number=0;
+  level1_score_count;
+  level1_score:number=0;
   original_passage: any = (level1_data as any).default;
+  is_level1_complete:boolean=false;
   
   // level 2
+  level2_score:number=0;
+  is_level2_complete:boolean=false;
   mcqs=null;
   is_timer:boolean=false;
-  mcq_score:number=0;
   mcq_score_count;
   max_mcq_level2:number=10;
   original_mcqs: any = (level2_data as any).default;
@@ -36,19 +41,23 @@ export class SharedDataService {
   level2_time_sec:number=0;   // level2 time 
   min:number;
   sec:number;
-
+  
   //level 3
   cardNumber = "1020 3949 4893 3983";
   cvv = 100;
   balance = 1000;
   otp_time:number=59;
   otptime;
+  is_transaction_complete:boolean=false;
   
-  constructor() {
+  constructor(public authService:AuthService) {
     this.min=this.level2_time_min;
     this.sec=this.level2_time_sec;
     this.savedata();
-    console.log(this.user);
+    let val=localStorage.getItem('currentLevel');
+    if (val!=null && val!=undefined && val!='')
+      this.current_level=Number(val);
+    console.log(this.user,this.level1_score,this.level2_score,this.is_transaction_complete);
   }
   
   shuffle(array) {
@@ -86,4 +95,49 @@ export class SharedDataService {
     if (this.user['email']!='')
       this.user['isLogin']=true;
   };
+  
+  async savescore(index:number){
+    let data={email:this.user.email,currentLevel:this.current_level,level1:this.level1_score,level2:{"totatQuestions": this.max_mcq_level2,"correct": this.level2_score},level3: this.is_transaction_complete};
+    this.authService.postData(data, 'updateProgress').then(async (result) => {
+      console.log(result);
+      if (result['status'] == 'success') {
+        if (index==1){
+          let keys=Object.keys(result['data']);
+          keys.forEach((key, index) => {
+            if (key=='email'){}
+            else if (key=='level2')
+              localStorage.setItem(key,JSON.stringify(result['data'][key]));
+            else
+              localStorage.setItem(key,result['data'][key]);
+          });
+        }
+      }
+    },async (err) => {
+      console.log(err);
+    });
+  }
+  
+  getscore(){
+    let data={email:this.user.email};
+    this.authService.postData(data, 'getProgress').then(async (result) => {
+      console.log(result);
+      if (result['status'] == 'success') {
+        this.level1_score=result['data']['level1'];
+        this.level2_score=result['data']['level2'].correct;
+        this.is_transaction_complete=result['data']['level3'];
+        this.current_level=result['data']['currentLevel'];
+        // console.log(result['data']['level1'],result['data']['level2'].correct,result['data']['level3'])
+        let keys=Object.keys(result['data']);
+        keys.forEach((key, index) => {
+          if (key=='email'){}
+          else if (key=='level2')
+            localStorage.setItem(key,JSON.stringify(result['data'][key]));
+          else
+            localStorage.setItem(key,result['data'][key]);
+        });
+      }
+    },async (err) => {
+      console.log(err);
+    });
+  }
 }

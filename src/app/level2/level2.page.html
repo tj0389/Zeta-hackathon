@@ -41,10 +41,10 @@
     </ion-grid>
 
     <ion-grid *ngIf="id>max_mcqs_no">
-
+        
         <img class="congrts" src="../../assets/pngwing.com.png" height="200px" width="200px">
         <ion-row center style="margin:20px 0px; font-size: 16px;"> You have successfully completed Level 2</ion-row>
-        <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Score is {{shared.mcq_score}}</ion-row>
+        <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Score is {{shared.level2_score}}</ion-row>
         <ion-row center style="margin:20px 0px;">Now , Proceed to Level 3 for more Fun</ion-row>
         <ion-row>
             <ion-button left (click)="openpage('level2')" expand="block">Re-Test</ion-button>

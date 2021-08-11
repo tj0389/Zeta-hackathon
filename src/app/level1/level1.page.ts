@@ -36,21 +36,23 @@ export class Level1Page implements OnInit {
     this.isdisabled(); 
     let score:number=this.id;
     let pre_score:number=0;
-    let val=localStorage.getItem('passage_score');
+    let val=localStorage.getItem('level1');
     if (val!=null && val!=undefined && val!=''){
       pre_score=Number(val);
       if (score>pre_score)
-        localStorage.setItem('passage_score',String(score));
+        this.shared.level1_score=score;
+        this.shared.savescore(1);
     }
     else{
-      localStorage.setItem('passage_score',String(score));
+      this.shared.level1_score=score;
+      this.shared.savescore(1);
     }
   }
   
   async fetch_passage(){
     this.shared.passage=this.shared.original_passage;
-    this.shared.passage_score_count= new Array(this.shared.passage.length);
-    this.shared.passage_score_count.fill(0);
+    this.shared.level1_score_count= new Array(this.shared.passage.length);
+    this.shared.level1_score_count.fill(0);
   }
   
   async isdisabled(){
@@ -64,11 +66,15 @@ export class Level1Page implements OnInit {
   
   async nextques(id:number){
     if(id == this.max_passage_no){
-      this.alertHandler()
+      this.alertHandler();
+      this.shared.current_level=2;
+      this.shared.savedata();
+      this.navCtrl.navigateRoot(['level1',{id:id}])
     }
-    this.navCtrl.navigateForward(['level1',{id:id}])
+    else
+      this.navCtrl.navigateForward(['level1',{id:id}])
   }
-
+  
   prevques(){
     this.navCtrl.pop();
   }

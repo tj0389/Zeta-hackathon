@@ -9,16 +9,24 @@ import { SharedDataService } from './providers/shared-data/shared-data.service';
 })
 
 export class AppComponent implements OnInit {
-  public appPages = [
-    { title: 'Home', url: '/home', icon: 'home'},
-    { title: 'Level1', url: '/level1', icon: 'home'},
-    { title: 'Level2', url: '/level2', icon: 'home'},
-    { title: 'Level3', url: '/level3', icon: 'home'}
-  ];
+  public appPages;
   
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   loading: HTMLIonLoadingElement;
   constructor(public navCtrl:NavController,public shared:SharedDataService,public alertCtrl:AlertController,public loadingCtrl:LoadingController) {
+    if (this.shared.user.userType=='1'){
+      this.appPages=[
+        { title: 'Home', url: '/home', icon: 'home'},
+      ];
+    }
+    else{
+      this.appPages = [
+        { title: 'Home', url: '/home', icon: 'home'},
+        { title: 'Level1', url: '/level1', icon: 'home'},
+        { title: 'Level2', url: '/level2', icon: 'home'},
+        { title: 'Level3', url: '/level3', icon: 'home'}
+      ];
+    }
   }
   
   async ngOnInit() {
@@ -32,8 +40,9 @@ export class AppComponent implements OnInit {
       this.navCtrl.navigateRoot(['home']);        
     }
   }
-
+  
   async logout(){
+    await this.shared.savescore(0);
     localStorage.clear();
     this.shared.user['isLogin']=false;
     this.shared.user['firstName']='Guest';
@@ -45,7 +54,7 @@ export class AppComponent implements OnInit {
     this.navCtrl.navigateRoot(['login']);
     console.log(this.shared.user);
   }
-
+  
   async showalert(){
     const alert = await this.alertCtrl.create({
       header: 'Error',

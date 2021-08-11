@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { NavController, MenuController } from '@ionic/angular';
+import { NavController, MenuController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
 
@@ -18,7 +18,7 @@ export class Level3Page implements OnInit {
   amount;
   otp;
 
-  constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute,private menuCtrl:MenuController) {
+  constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute,private menuCtrl:MenuController,public alertCtrl:AlertController) {
 
     this.shared.otptime=this.shared.otp_time;
 
@@ -32,9 +32,24 @@ export class Level3Page implements OnInit {
 
   ngOnInit() {
   }
-
+  
   nextpage(id:number){
-    if (id==1){
+    if (id==0){
+      console.log(this.shared.current_level);
+      if (this.shared.current_level<3){
+        this.alertCtrl.create({
+          header : `Alert!`,
+          message : `Level 2 is not completed`,
+        }).then(async (alert)=>{
+          alert.present();
+          await this.shared.delay(2000);
+          alert.dismiss();
+        })
+      }
+      else
+        this.navCtrl.navigateForward(['level3',{id:id}]);
+    }
+    else if (id==1){
       this.setTime();
       this.sendotp();
       this.menuCtrl.enable(false);
@@ -47,7 +62,7 @@ export class Level3Page implements OnInit {
   sendotp(){
     console.log('sending');
   }
-
+  
   async setTime(){
     while(this.shared.otptime>0){
       await this.shared.delay(1000);
@@ -56,10 +71,34 @@ export class Level3Page implements OnInit {
   }
   
   checkOTP() {
-    console.log("Verifying transaction!!");
     this.menuCtrl.enable(true);
     this.navCtrl.navigateRoot('home');
-    //this.currentView = this.inputOTP;
+    this.shared.current_level=4;
+    this.shared.is_transaction_complete=true;
+    this.shared.savescore(1);
   }
   
+  cancel(){
+    this.alertCtrl.create({
+      header : 'Alert!',
+      message :`Are you sure, your current transaction will be cancelled`,
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.canceltransaction();
+          }
+        },'NO'
+      ]
+    }).then(async (alert)=>{
+      alert.present();
+    })
+  }
+  
+  canceltransaction(){
+    this.shared.otptime=this.shared.otp_time;
+    this.navCtrl.navigateRoot('level3');
+    this.shared.is_transaction_complete=false;
+    this.shared.savescore(1);
+  }
 }

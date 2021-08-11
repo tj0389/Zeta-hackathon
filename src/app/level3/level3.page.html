@@ -39,7 +39,7 @@
         </center>
     
     </div>
-
+    
     <div *ngIf="id==1" div level3>
        
         <ion-item>
@@ -63,6 +63,7 @@
             <ion-input [(ngModel)]="otp"></ion-input>
         </ion-item>
         
+        <ion-button left (click)="cancel()" expand="block">cancel</ion-button>
         <ion-button right (click)="checkOTP()" expand="block">submit otp</ion-button>
         <center>
             <div>

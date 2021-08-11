@@ -14,7 +14,7 @@ export class Level2Page implements OnInit {
   id:number;
   max_mcqs_no:number=0;
 
-  constructor(public alertController : AlertController, private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService,public menuCtrl:MenuController) { 
+  constructor(public alertCtrl : AlertController, private navCtrl:NavController,private activatedRoute: ActivatedRoute,public shared:SharedDataService,public menuCtrl:MenuController) { 
     
     if (shared.mcqs==null || shared.mcqs==undefined){
       this.fetch_mcq();
@@ -64,6 +64,7 @@ export class Level2Page implements OnInit {
     });
     if (flag==1)
       this.shared.mcq_score_count[this.id-1]=0;
+    console.log(this.shared.mcq_score_count);
   }
 
   nextques(id:number){
@@ -72,14 +73,26 @@ export class Level2Page implements OnInit {
     }
     else{
       if (this.id==0){
-        this.fetch_mcq();
-        if (this.shared.is_timer==false){
-          this.shared.is_timer=true;
-          this.resettimer();
-          this.setTime();
-          this.menuCtrl.enable(false);
+        if (this.shared.current_level<2){
+          this.alertCtrl.create({
+            header : `Alert!`,
+            message : `Level 1 is not completed`,
+          }).then(async (alert)=>{
+            alert.present();
+            await this.delay(2000);
+            alert.dismiss();
+          })
         }
-        this.navCtrl.navigateRoot(['level2',{id:id}]);
+        else{
+          this.fetch_mcq();
+          if (this.shared.is_timer==false){
+            this.shared.is_timer=true;
+            this.resettimer();
+            this.setTime();
+            this.menuCtrl.enable(false);
+          }
+          this.navCtrl.navigateRoot(['level2',{id:id}]);
+        }
       }
       else
         this.navCtrl.navigateForward(['level2',{id:id}]);
@@ -95,7 +108,7 @@ export class Level2Page implements OnInit {
   }
 
   showsubmitpopup(){
-    this.alertController.create({
+    this.alertCtrl.create({
       header : 'Submit',
       cssClass : 'modal-wrapper',
       message : `Are you sure want to submit the test`,
@@ -117,16 +130,23 @@ export class Level2Page implements OnInit {
     this.resettimer();
     this.menuCtrl.enable(true);
     this.navCtrl.navigateRoot(['level2',{id:this.max_mcqs_no}]);
-    this.shared.mcq_score=0;
+    let mcq_score:number=0;
     this.shared.mcq_score_count.forEach((value,index) => {
       if (value==1){
-        this.shared.mcq_score+=1;
+        mcq_score+=1;
       }
     });
+    if (mcq_score>this.shared.level2_score){
+      this.shared.level2_score=mcq_score;
+    }
+    this.shared.current_level=3;
+    this.shared.savescore(1);
+    // localStorage.setItem('is_level2_complete',String(true));
+    // this.shared.is_level2_complete=true;
     this.shared.is_checked = new Array(this.shared.mcqs.length);
     this.shared.mcq_score_count= new Array(this.shared.mcqs.length);
     this.shared.mcq_score_count.fill(0);
-    this.alertController.create({
+    this.alertCtrl.create({
       header : 'Congratulations!!',
       cssClass : 'custom-wrapper',
       message :`<img src="../../assets/pngwing.com.png">`,
@@ -151,7 +171,7 @@ export class Level2Page implements OnInit {
   }
   
   timefinished(){
-    this.alertController.create({
+    this.alertCtrl.create({
       header : `Time's Up`,
       cssClass : 'modal-wrapper',
       message : `Your Test will be auto-submitted`,
@@ -179,5 +199,5 @@ export class Level2Page implements OnInit {
       this.timefinished();
     }
   }
-
+  
 }

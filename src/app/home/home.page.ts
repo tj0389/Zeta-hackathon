@@ -13,7 +13,8 @@ export class homePage implements OnInit {
   child_data;
   
   constructor(private activatedRoute: ActivatedRoute,private navCtrl:NavController,public shared:SharedDataService) {
-
+    if (this.shared.user.userType=='2')
+    this.shared.getscore();
   }
   
   ngOnInit() {
