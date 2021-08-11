@@ -65,10 +65,10 @@
             </ion-label>
             <ion-input [(ngModel)]="ch">
             </ion-input>
-
+        
         </ion-item>
-        <center>
-            <ion-button (click)="ChildrenUpdation()">Add Child</ion-button>
+        <center >
+            <ion-button *ngIf="userType==1" (click)="ChildrenUpdation()">Add Child</ion-button>
         </center>
         <center>
             <div class="container">

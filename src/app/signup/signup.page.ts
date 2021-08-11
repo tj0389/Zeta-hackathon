@@ -107,17 +107,29 @@ export class SignupPage implements OnInit {
   }
   
   ChildrenUpdation(){
-    console.log(this.ch)
-    this.child.push(this.ch)
-    this.child = this.child.filter((value,index,self)=>{
-        return self.indexOf(value) == index;
-    })
+    if (!GlobalVarsService.check_email(this.ch)){
+      this.alertCtrl.create({
+        header : 'Error',
+        message : `Email is Not Valid`,
+        buttons: ['Ok']
+      }).then(async (alert)=>{
+        alert.present();
+        await this.shared.delay(2000);
+        alert.dismiss();
+      })
+    }
+    else{
+      this.child.push(this.ch)
+      this.child = this.child.filter((value,index,self)=>{
+          return self.indexOf(value) == index;
+      })
+      this.ch='';
+    }
   }
+  
   signin(){
-    let arr=[];
-    if (this.userType==1)
-      arr=this.child;
-    let data = { firstName: this.firstName,lastName: this.lastName,email: this.email,mobile:this.mobile,userType: this.userType,password: this.password,childrenId: arr};
+    console.log(this.child);
+    let data = { firstName: this.firstName,lastName: this.lastName,email: this.email,mobile:this.mobile,userType: this.userType,password: this.password,childrenId: this.child};
     this.showLoader();
     this.authService.postData(data, 'registerUser').then(async (result) => {
       console.log(result);
