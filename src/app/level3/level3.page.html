@@ -31,8 +31,18 @@
         <ion-row> CVV: {{shared.cvv}} </ion-row>
         <ion-row>  </ion-row> -->
         
-        <center><small style="color: green;"> Your Task:<br> Virtual pay Rs 10 to UPI ID dummy@apl</small> </center>
-        <ion-button right (click)="nextpage(id)" expand="block">Start </ion-button>
+        <!-- <center><small style="color: green;"> Your Task:<br> Virtual pay Rs 10 to UPI ID dummy@apl</small> </center>
+        <ion-button right (click)="nextpage(id)" expand="block">Start </ion-button> -->
+
+        <center>
+            <h3>Your Tasks</h3>
+            <ion-card>
+                <ion-card-content>
+                    Virtual pay Rs 10 to UPI ID XXX@apl
+                </ion-card-content>
+                <ion-button (click)="startTask()" expand="block">Start </ion-button>
+            </ion-card>
+        </center>
 
     </div>
 

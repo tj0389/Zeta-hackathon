@@ -63,15 +63,25 @@
             <ion-label position="floating">
                 Childrens UserId:<span style="color: red;">&nbsp;*</span>
             </ion-label>
-            <ion-input [(ngModel)]="child">
+            <ion-input [(ngModel)]="ch">
             </ion-input>
-        </ion-item>
 
+        </ion-item>
+        <center>
+            <ion-button (click)="ChildrenUpdation()">Add Child</ion-button>
+        </center>
+        <center>
+            <div class="container">
+                <span *ngFor="let items of child" child>
+                {{items}}
+            </span>
+            </div>
+        </center>
         <ion-item>
             <ion-label position="floating">
                 Password<span style="color: red;">&nbsp;*</span>
             </ion-label>
-            <ion-input type="password" [(ngModel)]="password">
+            <ion-input [(ngModel)]="password" type="password">
             </ion-input>
         </ion-item>
 
@@ -79,7 +89,7 @@
             <ion-label position="floating">
                 Confirm Password<span style="color: red;">&nbsp;*</span>
             </ion-label>
-            <ion-input type="password" [(ngModel)]="confirm_password">
+            <ion-input [(ngModel)]="confirm_password" type="password">
             </ion-input>
         </ion-item>
 
