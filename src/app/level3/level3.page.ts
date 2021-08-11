@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
 
@@ -8,19 +8,19 @@ import { SharedDataService } from '../providers/shared-data/shared-data.service'
   templateUrl: './level3.page.html',
   styleUrls: ['./level3.page.scss'],
 })
+
 export class Level3Page implements OnInit {
 
   id:number;
-  time : number=15;
-  currentView: number;
-  Instructions = 0;
-  showCardDetails = 1;
-  inputTransactionDetails = 2;
-  inputOTP = 3;
-  interval : any
-  count = 0
+  cardnumber;
+  cvv;
+  upiid;
+  amount;
+  otp;
 
-  constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute) {
+  constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute,private menuCtrl:MenuController) {
+
+    this.shared.otptime=this.shared.otp_time;
 
     this.id=JSON.parse(this.activatedRoute.snapshot.paramMap.get('id'));
 
@@ -34,39 +34,32 @@ export class Level3Page implements OnInit {
   }
 
   nextpage(id:number){
-    this.navCtrl.navigateForward(['level3',{id:id}]);
+    if (id==1){
+      this.setTime();
+      this.sendotp();
+      this.menuCtrl.enable(false);
+      this.navCtrl.navigateRoot(['level3',{id:id}]);
+    }
+    else
+      this.navCtrl.navigateForward(['level3',{id:id}]);
   }
 
-  startLevel() {
-    console.log("starting level!");
-    this.currentView = this.showCardDetails;
-  }
-
-  startTask() {
-    console.log("Task is started now!");
-    this.currentView = this.inputTransactionDetails;
-  }
-
-  pay() {
-    console.log("Payment is initiated!");
-    this.currentView = this.inputOTP;
-    this.setTime()
-  }
-
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+  sendotp(){
+    console.log('sending');
   }
 
   async setTime(){
-    while(this.time>0){
-      await this.delay(1000);
-      this.time=this.time-1;
+    while(this.shared.otptime>0){
+      await this.shared.delay(1000);
+      this.shared.otptime=this.shared.otptime-1;
     }
   }
   
   checkOTP() {
     console.log("Verifying transaction!!");
+    this.menuCtrl.enable(true);
+    this.navCtrl.navigateRoot('home');
     //this.currentView = this.inputOTP;
   }
-
+  
 }

@@ -41,6 +41,8 @@ export class SharedDataService {
   cardNumber = "1020 3949 4893 3983";
   cvv = 100;
   balance = 1000;
+  otp_time:number=59;
+  otptime;
   
   constructor() {
     this.min=this.level2_time_min;
