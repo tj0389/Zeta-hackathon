@@ -111,7 +111,7 @@ export class Level2Page implements OnInit {
       alert.present()
     })
   }
-
+  
   submittest(){
     this.stoptimer();
     this.resettimer();

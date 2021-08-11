@@ -1,40 +1,39 @@
 <ion-header>
-
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button *ngIf="id!=0"></ion-back-button>
-            <ion-menu-button *ngIf="id==0"></ion-menu-button>
+            <ion-menu-button *ngIf="id==0 || id>max_passage_no"></ion-menu-button>
         </ion-buttons>
-        <ion-title *ngIf="id==0 || id>max_ques_no">Level 1</ion-title>
-        <ion-title *ngIf="id!=0 && id<=max_ques_no">Question {{id}}</ion-title>
+        <ion-title *ngIf="id==0 || id>max_passage_no">Level 1</ion-title>
+        <ion-title *ngIf="id!=0 && id<=max_passage_no">Question {{id}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <ion-grid *ngIf="id==0 && id<=max_ques_no">
-        <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
+    <ion-grid *ngIf="id==0 && id<=max_passage_no">
+        <ion-row>Now here you see different passage that will help you to understand how the financial services work ........</ion-row>
         <ion-row>
             <p> Click to start the Level </p>
         </ion-row>
-
+        
         <ion-button right (click)="nextques(id)" expand="block">Start</ion-button>
     </ion-grid>
 
-    <ion-grid *ngIf="id!=0 && id<=max_ques_no">
+    <ion-grid *ngIf="id!=0 && id<=max_passage_no">
         <div div>
-            <span style="font-weight: bold;">{{shared.qans[id-1].question}}</span>
-            <span> {{shared.qans[id-1].answer}}</span>
+            <span style="font-weight: bold;">{{shared.passage[id-1].question}}</span>
+            <span> {{shared.passage[id-1].answer}}</span>
         </div>
         <ion-row>
             <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
-            <ion-button right [disabled]="flag" *ngIf="id<max_ques_no" (click)="nextques(id)" expand="block">Next</ion-button>
-            <ion-button right [disabled]="flag" *ngIf="id==max_ques_no" (click)="nextques(id)" expand="block">Finish</ion-button>
+            <ion-button left [disabled]="flag" (click)="prevques()" expand="block">Prev</ion-button>
+            <ion-button right [disabled]="flag" *ngIf="id<max_passage_no" (click)="nextques(id)" expand="block">Next</ion-button>
+            <ion-button right [disabled]="flag" *ngIf="id==max_passage_no" (click)="nextques(id)" expand="block">Finish</ion-button>
         </ion-row>
-
+    
     </ion-grid>
 
-    <ion-grid *ngIf="id>max_ques_no">
+    <ion-grid *ngIf="id>max_passage_no">
 
         <img class="congrts" src="../../assets/pngwing.com.png" height="200px" width="200px">
         <ion-row center style="margin:20px 0px; font-size: 16px;"> You have successfully completed Level 1</ion-row>

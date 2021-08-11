@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as level2_data from "../../level2_data.json";
+import * as level1_data from "../../level1_data.json";
 
 @Injectable({
   providedIn: 'root'
@@ -14,33 +15,33 @@ export class SharedDataService {
     email: '',
     userType: '',
     mobile: 0,
-    childrenId: []
+    childrenId: Array(0),
   };
   
-  cardNumber = "1020 3949 4893 3983";
-  cvv = 100;
-  balance = 1000;
-
+  //level 1
+  passage=null;
+  passage_score_count;
+  passage_score:number=0;
+  original_passage: any = (level1_data as any).default;
+  
+  // level 2
+  mcqs=null;
+  is_timer:boolean=false;
   mcq_score:number=0;
   mcq_score_count;
   max_mcq_level2:number=10;
-
-  qans=null;
-  original_mcqs: any = (level2_data as any).default;;
-  mcqs=null;
+  original_mcqs: any = (level2_data as any).default;
   is_checked=[];
-
   level2_time_min:number=5;   // level2 time
-  level2_time_sec:number=0;   // level time 
-
+  level2_time_sec:number=0;   // level2 time 
   min:number;
   sec:number;
+
+  //level 3
+  cardNumber = "1020 3949 4893 3983";
+  cvv = 100;
+  balance = 1000;
   
-  is_timer:boolean=false;
-
-  is_level1:boolean=false;
-  is_level2:boolean=false;
-
   constructor() {
     this.min=this.level2_time_min;
     this.sec=this.level2_time_sec;
@@ -78,6 +79,5 @@ export class SharedDataService {
     });
     if (this.user['email']!='')
       this.user['isLogin']=true;
-  }
-  
+  } 
 }

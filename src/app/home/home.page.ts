@@ -10,9 +10,11 @@ import { SharedDataService } from '../providers/shared-data/shared-data.service'
 })
 export class homePage implements OnInit {
   public title: string;
+  child_data;
   
   constructor(private activatedRoute: ActivatedRoute,private navCtrl:NavController,public shared:SharedDataService) {
-    console.log(this.shared.user.userType)
+    this.child_data=this.shared.user.childrenId;
+    console.log(this.child_data);
   }
   
   ngOnInit() {
