@@ -47,8 +47,11 @@ export class Level1Page implements OnInit {
   
   async isdisabled(){
     this.flag=true;
-    await this.delay(2000);
-    this.flag=false;
+    this.delay(2000)
+    .then(()=>{
+      this.flag=false;
+    })
+
   }
   
   async nextques(id:number){

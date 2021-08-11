@@ -1,38 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-grid>
+    <ion-grid>
 
-    <ion-item>
-      <ion-label position="floating">
-        Email
-      </ion-label>
-      <ion-input [(ngModel)]="email"></ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                Email
+            </ion-label>
+            <ion-input [(ngModel)]="email"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">
-        Password
-      </ion-label>
-      <ion-input [(ngModel)]="password" type="password"></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="logIn()" >Log In </ion-button>
-      </ion-col>
-    </ion-row>
+        <ion-item>
+            <ion-label position="floating">
+                Password
+            </ion-label>
+            <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="logIn()" expand="block" shape="round">Log In </ion-button>
 
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="signUp()">Sign Up </ion-button>
-      </ion-col>
-    </ion-row>
 
-  </ion-grid>
+                <center>
+                    <ion-button (click)="signUp()" signup>Dont have account ?</ion-button>
+                </center>
+
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
 
 </ion-content>

@@ -1,102 +1,102 @@
 <ion-header>
-  <ion-toolbar >
-    <ion-title> Sign Up </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title> Sign Up </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-grid>
+    <ion-grid>
 
-    <ion-item>
-      <ion-label position="floating">
-        First Name<span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="firstName">
+        <ion-item>
+            <ion-label position="floating">
+                First Name<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="firstName">
 
-      </ion-input>
-    </ion-item>
+            </ion-input>
+        </ion-item>
 
 
-    <ion-item>
-      <ion-label position="floating">
-        Last Name<span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="lastName">
+        <ion-item>
+            <ion-label position="floating">
+                Last Name<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="lastName">
 
-      </ion-input>
-    </ion-item>
+            </ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">
-        Mobile No.<span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="mobile">
+        <ion-item>
+            <ion-label position="floating">
+                Mobile No.<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="mobile">
 
-      </ion-input>
-    </ion-item>
+            </ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">
-        Email<span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="email" type="email">
+        <ion-item>
+            <ion-label position="floating">
+                Email<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="email" type="email">
 
-      </ion-input>
-    </ion-item>
+            </ion-input>
+        </ion-item>
 
-    <ion-item lines="full">
-      <ion-col size="4">
-        <ion-label>Are you a :</ion-label>
-      </ion-col>
-      <ion-col (click)="changerole(2)" size="4">
-        <ion-checkbox [checked]="!flag"></ion-checkbox>
-        <ion-label>Child</ion-label>
-      </ion-col>
-      <ion-col (click)="changerole(1)" size="4">
-        <ion-checkbox [checked]="flag" ></ion-checkbox>
-        <ion-label>Parent</ion-label>
-      </ion-col>
-    </ion-item>
-    
-    <ion-item *ngIf="userType==1">
-      <ion-label position="floating">
-        Childrens UserId:<span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="child">    
-      </ion-input>
-    </ion-item>
+        <ion-item lines="full">
+            <ion-col size="4">
+                <ion-label>Are you a :</ion-label>
+            </ion-col>
+            <ion-col (click)="changerole(2)" size="4">
+                <ion-checkbox [checked]="!flag"></ion-checkbox>
+                <ion-label>Child</ion-label>
+            </ion-col>
+            <ion-col (click)="changerole(1)" size="4">
+                <ion-checkbox [checked]="flag"></ion-checkbox>
+                <ion-label>Parent</ion-label>
+            </ion-col>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">
-        Password<span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="password">
-      </ion-input>
-    </ion-item>
+        <ion-item *ngIf="userType==1">
+            <ion-label position="floating">
+                Childrens UserId:<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="child">
+            </ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">
-        Confirm Password<span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="confirm_password">
-      </ion-input>
-    </ion-item>
-    
-  </ion-grid>
+        <ion-item>
+            <ion-label position="floating">
+                Password<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="password">
+            </ion-input>
+        </ion-item>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="signin()">Sign Up</ion-button>
-      </ion-col>
-    </ion-row>
+        <ion-item>
+            <ion-label position="floating">
+                Confirm Password<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="confirm_password">
+            </ion-input>
+        </ion-item>
 
-    <!-- <ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="signin()" style="float : right">Sign Up</ion-button>
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row>
       <ion-col>
         <ion-button (click)="logIn()">Log In </ion-button>
       </ion-col>
     </ion-row> -->
-  </ion-grid>
+    </ion-grid>
 
 </ion-content>
