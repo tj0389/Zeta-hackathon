@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
 
@@ -7,6 +9,8 @@ import { SharedDataService } from '../providers/shared-data/shared-data.service'
   styleUrls: ['./level3.page.scss'],
 })
 export class Level3Page implements OnInit {
+
+  id:number;
   time : number=15;
   currentView: number;
   Instructions = 0;
@@ -16,11 +20,21 @@ export class Level3Page implements OnInit {
   interval : any
   count = 0
 
-  constructor(public shared: SharedDataService) {
-    this.currentView = this.Instructions;
+  constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute) {
+
+    this.id=JSON.parse(this.activatedRoute.snapshot.paramMap.get('id'));
+
+    if (this.id==undefined || this.id==null)
+      this.id=0;
+    else
+      this.id+=1;
   }
 
   ngOnInit() {
+  }
+
+  nextpage(id:number){
+    this.navCtrl.navigateForward(['level3',{id:id}]);
   }
 
   startLevel() {

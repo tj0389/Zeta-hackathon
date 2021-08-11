@@ -13,8 +13,7 @@ export class homePage implements OnInit {
   child_data;
   
   constructor(private activatedRoute: ActivatedRoute,private navCtrl:NavController,public shared:SharedDataService) {
-    this.child_data=this.shared.user.childrenId;
-    console.log(this.child_data);
+
   }
   
   ngOnInit() {

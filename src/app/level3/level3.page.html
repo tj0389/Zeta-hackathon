@@ -1,23 +1,16 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="level2"></ion-back-button>
+            <ion-menu-button *ngIf="id==0"></ion-menu-button>
+            <ion-back-button *ngIf="id>0"></ion-back-button>
         </ion-buttons>
-        <ion-title>level3</ion-title>
+        <ion-title>Level3</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <div *ngIf="currentView == Instructions" div>
-        <ion-row>Now here you see different qans that will help you to understand how the financial services work ........</ion-row>
-        <ion-row> Click to start the Level </ion-row>
-
-        <ion-button right (click)="startLevel()" expand="block">Start</ion-button>
-    </div>
-
-
-    <div *ngIf="currentView == showCardDetails" div>
+    <div *ngIf="id==0" div>
         <div class="card">
             <div class="card-number">
                 <p>Card Number</p>
@@ -37,60 +30,61 @@
         <ion-row>Card Number: </ion-row>
         <ion-row> CVV: {{shared.cvv}} </ion-row>
         <ion-row>  </ion-row> -->
+        
+        <center><small style="color: green;"> Your Task:<br> Virtual pay Rs 10 to UPI ID dummy@apl</small> </center>
+        <ion-button right (click)="nextpage(id)" expand="block">Start </ion-button>
 
-        <center><small style="color: green;"> Your Task:<br> Virtual pay Rs 10 to UPI ID XXX@apl</small> </center>
-        <ion-button right (click)="startTask()" expand="block">Start </ion-button>
+    </div>
+
+    <div *ngIf="id==1" div level3>
+        <ion-item>
+            <ion-label position="floating">
+                Virtual Card Number
+            </ion-label>
+            <ion-input>
+
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                CVV
+            </ion-label>
+            <ion-input>
+
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                UPI ID
+            </ion-label>
+            <ion-input>
+
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                Amount To Transfer
+            </ion-label>
+            <ion-input>
+
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">
+                Mobile Number
+            </ion-label>
+            <ion-input>
+
+            </ion-input>
+        </ion-item>
+
+        <ion-button right (click)="nextpage(id)" expand="block">Pay Virtual Money </ion-button>
+
     </div>
 
 
-    <div *ngIf="currentView == inputTransactionDetails" div level3>
-        <ion-item>
-            <ion-label position="floating">
-                Enter Your Virtual Card Number
-            </ion-label>
-            <ion-input>
-
-            </ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="floating">
-                Enter Your CVV
-            </ion-label>
-            <ion-input>
-
-            </ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="floating">
-                Enter Your UPI ID
-            </ion-label>
-            <ion-input>
-
-            </ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="floating">
-                Enter Money To Transfer
-            </ion-label>
-            <ion-input>
-
-            </ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label position="floating">
-                Enter Your mobile Number
-            </ion-label>
-            <ion-input>
-
-            </ion-input>
-        </ion-item>
-
-        <ion-button right (click)="pay()" expand="block">Pay Virtual Money </ion-button>
-    </div>
-
-
-    <div *ngIf="currentView == inputOTP" div level3>
+    <div *ngIf="id==2" div level3>
 
 
         <ion-item>

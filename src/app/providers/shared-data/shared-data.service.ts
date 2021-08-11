@@ -74,10 +74,14 @@ export class SharedDataService {
   savedata(){
     let keys=Object.keys(this.user);
     keys.forEach((key, index) => {
-      if (localStorage.getItem(key)!=null && localStorage.getItem(key)!=undefined)
-        this.user[key]=localStorage.getItem(key);
+      if (localStorage.getItem(key)!=null && localStorage.getItem(key)!=undefined){
+        if (key=='childrenId')
+          this.user[key]=JSON.parse(localStorage.getItem(key));
+        else
+          this.user[key]=localStorage.getItem(key);
+      }
     });
     if (this.user['email']!='')
       this.user['isLogin']=true;
-  } 
+  };
 }

@@ -31,9 +31,9 @@
 </ion-content>
 
 <ion-content *ngIf="shared.user.userType=='1'" [fullscreen]="true">
-    <!-- <ion-card *ngFor="let child of shared.user.childrenId">
-      <ion-card-title>
-        child
-      </ion-card-title>
-    </ion-card> -->
+    <ion-card *ngFor="let child of shared.user.childrenId">
+      <ion-card-header>
+        <ion-card-title>child</ion-card-title>
+      </ion-card-header>
+    </ion-card>
 </ion-content>

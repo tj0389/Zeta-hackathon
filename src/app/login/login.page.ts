@@ -65,7 +65,10 @@ export class LoginPage implements OnInit {
           if (result['status'] == 'success') {
             let keys=Object.keys(result['data']);
             keys.forEach((key, index) => {
-              localStorage.setItem(key,result['data'][key]);
+              if (key=='childrenId')
+                localStorage.setItem(key,JSON.stringify(result['data'][key]));
+              else
+                localStorage.setItem(key,result['data'][key]);
             });
             this.shared.savedata();
             this.menuCtrl.enable(true);
