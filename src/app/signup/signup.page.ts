@@ -22,10 +22,10 @@ export class SignupPage implements OnInit {
   mobile;
   password;
   confirm_password;
-  child;
+  child = [];
   flag:boolean=false;
   userType:number=2;
-  
+  ch ;
   ngOnInit() {
   }
 
@@ -106,10 +106,17 @@ export class SignupPage implements OnInit {
     }
   }
   
+  ChildrenUpdation(){
+    console.log(this.ch)
+    this.child.push(this.ch)
+    this.child = this.child.filter((value,index,self)=>{
+        return self.indexOf(value) == index;
+    })
+  }
   signin(){
     let arr=[];
     if (this.userType==1)
-      arr=this.child.split(',');
+      arr=this.child;
     let data = { firstName: this.firstName,lastName: this.lastName,email: this.email,mobile:this.mobile,userType: this.userType,password: this.password,childrenId: arr};
     this.showLoader();
     this.authService.postData(data, 'registerUser').then(async (result) => {
