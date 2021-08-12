@@ -1,13 +1,9 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title> Sign Up </ion-title>
-    </ion-toolbar>
-</ion-header>
-
 <ion-content>
 
-    <ion-grid>
-
+    <ion-grid class="form">
+        <center>
+            <h1 style="padding-bottom: 10px;transform: scale(1.2);">SignUp</h1>
+        </center>
         <ion-item>
             <ion-label position="floating">
                 First Name<span style="color: red;">&nbsp;*</span>
@@ -65,9 +61,9 @@
             </ion-label>
             <ion-input [(ngModel)]="ch">
             </ion-input>
-        
+
         </ion-item>
-        <center >
+        <center>
             <ion-button *ngIf="userType==1" (click)="ChildrenUpdation()">Add Child</ion-button>
         </center>
         <center>
@@ -92,21 +88,21 @@
             <ion-input [(ngModel)]="confirm_password" type="password">
             </ion-input>
         </ion-item>
-
-    </ion-grid>
-
-    <ion-grid>
         <ion-row>
             <ion-col>
-                <ion-button (click)="signUp()" style="float : right">Sign Up</ion-button>
+                <ion-button (click)="signUp()" shape="round" expand="block">Sign Up</ion-button>
             </ion-col>
         </ion-row>
 
-        <!-- <ion-row>
+    </ion-grid>
+
+    <!-- <ion-grid> -->
+
+    <!-- <ion-row>
       <ion-col>
         <ion-button (click)="logIn()">Log In </ion-button>
       </ion-col>
     </ion-row> -->
-    </ion-grid>
+    <!-- </ion-grid> -->
 
 </ion-content>
