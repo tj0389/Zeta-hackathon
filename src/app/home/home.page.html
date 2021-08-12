@@ -86,18 +86,20 @@
 
 
     </ion-card>
-
-    <ion-label *ngIf="flag==false " (click)="flag=true ">Click to add more child</ion-label>
-    <ion-label *ngIf="flag==true " (click)="flag=false ">Click to cancel</ion-label>
-
-    <ion-item *ngIf="flag==true ">
-        <ion-label position="floating ">
-            Child Email:
-        </ion-label>
-        <ion-input [(ngModel)]="ch ">
-        </ion-input>
-    </ion-item>
-
-    <ion-button *ngIf="flag==true " (click)="addchild() ">Add Child</ion-button>
-
+    <center>
+        <ion-button *ngIf="flag==false " (click)="flag=true ">Click to add more child</ion-button>
+        <ion-button *ngIf="flag==true " (click)="flag=false ">Click to cancel</ion-button>
+    </center>
+    <div>
+        <ion-item *ngIf="flag==true " class="add-child">
+            <ion-label position="floating ">
+                Child Email:
+            </ion-label>
+            <ion-input [(ngModel)]="ch ">
+            </ion-input>
+        </ion-item>
+        <ion-item class="add-child2">
+            <ion-button *ngIf="flag==true " (click)="addchild() ">Add Child</ion-button>
+        </ion-item>
+    </div>
 </ion-content>
