@@ -35,6 +35,9 @@ export class Level1Page implements OnInit {
   ngOnInit() {
     this.isdisabled(); 
     let score:number=this.id;
+    if (score>0)
+      score-=1;
+    console.log(score);
     let pre_score:number=0;
     let val=JSON.parse(localStorage.getItem('level1'));
     if (val.read!=null && val.read!=undefined && val.read!=''){
