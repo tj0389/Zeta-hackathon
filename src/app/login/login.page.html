@@ -1,38 +1,37 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>Login</ion-title>
-    </ion-toolbar>
-</ion-header>
-
+<div style="text-align: center;margin-top: 10px;">
+    <img src="../../assets/icon/favicon.jpg" height="200" width="200" alt="" srcset="">
+</div>
 <ion-content>
 
-  <ion-grid>
+    <ion-grid class="form">
+        <center>
+            <h1 style="margin-top: 5px !important;padding-bottom: 10px;transform: scale(1.2);">Login</h1>
+        </center>
+        <ion-item>
+            <ion-label position="floating">
+                Email <span style="color: red;">*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="email"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">
-        Email <span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">
-        Password <span style="color: red;">*</span>
-      </ion-label>
-      <ion-input [(ngModel)]="password" type="password"></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-          <ion-button (click)="logIn()" expand="block" shape="round">Log In </ion-button>
+        <ion-item>
+            <ion-label position="floating">
+                Password <span style="color: red;">*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="logIn()" expand="block" shape="round">Log In </ion-button>
 
 
-          <center>
-              <ion-button (click)="signUp()" signup>Dont have account ?</ion-button>
-          </center>
+                <center>
+                    <ion-button (click)="signUp()" signup>Dont have account ?</ion-button>
+                </center>
 
-      </ion-col>
-  </ion-row>
+            </ion-col>
+        </ion-row>
 
-  </ion-grid>
+    </ion-grid>
 
 </ion-content>

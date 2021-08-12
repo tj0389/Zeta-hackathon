@@ -36,6 +36,7 @@ ion-button {
 
 [div] {
     margin: 10px;
+    margin-left: 15px;
 }
 
 ion-item {
@@ -88,4 +89,25 @@ ion-item {
     border: none !important;
     --box-shadow: none !important;
     text-transform: capitalize;
+}
+
+[l] {
+    --background: var(--ion-color-primary);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.level {
+    color: white;
+    background-color: var(--ion-color-primary);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.form {
+    border-radius: 10px;
+    background-color: rgb(202, 232, 241);
+    margin: 10px;
+    padding: 5px;
 }

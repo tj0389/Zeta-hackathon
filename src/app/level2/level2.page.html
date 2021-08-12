@@ -5,13 +5,15 @@
         </ion-buttons>
         <ion-title slot="start" *ngIf="id==0 || id>max_mcqs_no">Level 2</ion-title>
         <ion-title slot="start" *ngIf="id!=0 && id<=max_mcqs_no">Question {{id}}</ion-title>
-        <ion-title *ngIf="id>0 && id<=max_mcqs_no" slot="end">{{shared.min<=9?'0':''}}{{shared.min}}:{{shared.sec<=9?'0':''}}{{shared.sec}}</ion-title>
+        <ion-title *ngIf="id>0 && id<=max_mcqs_no" slot="end">{{shared.min
+            <=9? '0': ''}}{{shared.min}}:{{shared.sec<=9? '0': ''}}{{shared.sec}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <ion-grid *ngIf="id==0 && id<=max_mcqs_no" div>
+    <ion-grid *ngIf="id==0 && id<=max_mcqs_no" div class="level">
+        <h1>LEVEL 2</h1>
         <ion-row>Now here you see different MCQ that will help you to Solve to Test you Knowledge ........</ion-row>
         <ion-row>
             <p>Click to start the Level </p>
@@ -20,7 +22,7 @@
         <ion-button right (click)="nextques(id)" expand="block">Start</ion-button>
     </ion-grid>
 
-    <ion-grid  *ngIf="id!=0 && id<=max_mcqs_no">
+    <ion-grid *ngIf="id!=0 && id<=max_mcqs_no">
 
         <ion-row style="margin:10px 0px; font-weight: bold;">{{shared.mcqs[id-1].question}}</ion-row>
         <ion-row size="12" *ngFor="let entry of shared.mcqs[id-1].option,index as i">
@@ -41,7 +43,7 @@
     </ion-grid>
 
     <ion-grid *ngIf="id>max_mcqs_no">
-        
+
         <img class="congrts" src="../../assets/pngwing.com.png" height="200px" width="200px">
         <ion-row center style="margin:20px 0px; font-size: 16px;"> You have successfully completed Level 2</ion-row>
         <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Score is {{shared.level2_score}}</ion-row>

@@ -16,3 +16,10 @@
     align-items: center;
     width: 80%;
 }
+
+ion-item {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    --highlight-color-valid: var(--ion-color-primary) !important;
+}
