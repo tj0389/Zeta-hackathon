@@ -2,6 +2,11 @@ ion-menu-button {
     color: var(--ion-color-primary);
 }
 
+.cen{
+    display: flex;
+    justify-content: center;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;

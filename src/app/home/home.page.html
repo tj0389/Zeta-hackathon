@@ -37,53 +37,50 @@
             <ion-button *ngIf="is_shown[i]==1" (click)="is_shown[i]=1-is_shown[i]" btn>Hide Progress</ion-button>
         </ion-card-header>
 
-        <ion-grid *ngIf="is_shown[i]==1 && progress[i]!=undefined && progress[i].length!=0" div>
+        <ion-grid *ngIf="is_shown[i]==1">
             <ion-row>
-                <ion-col size="6">
+                <ion-col class="ion-text-center" size="6">
+                    <h2>
+                        Level 1
+                    </h2>
+                    <div class="ion-justify-content-center" *ngIf="is_start[i]==1">
+                        <span *ngIf="progress[i].length!=0" meter>{{progress[i]['level1'].read}}</span><span meter1>/{{progress[i]['level1'].totatQuestions}}</span>
+                    </div>
+                    <div class="ion-justify-content-center" *ngIf="is_start[i]==0">
+                        <span meter3>Not Started</span>
+                    </div>
+                </ion-col>
+
+                <ion-col class="ion-text-center" size="6">
 
                     <h2>
-                        Level 1:
+                        Level 2
                     </h2>
-                    <div>
-                        <span meter>{{progress[i]['level1'].read}}</span><span meter1>/{{progress[i]['level1'].totatQuestions}}</span>
+                    <div class="ion-justify-content-center" *ngIf="is_start[i]==1">
+                        <span *ngIf="progress[i].length!=0" meter>{{progress[i]['level2'].correct}}</span><span meter1>/{{progress[i]['level2'].totatQuestions}}</span>
+                    </div>
+                    <div class="ion-justify-content-center" *ngIf="is_start[i]==0">
+                        <span meter3>Not Started</span>
                     </div>
 
                 </ion-col>
-                <ion-col size="6">
-
+            </ion-row>
+            <ion-row>
+                <ion-col class="ion-text-center">
                     <h2>
-                        Level 2:
+                        Level 3
                     </h2>
-                    <div>
-                        <span meter>{{progress[i]['level2'].correct}}</span><span meter1>/{{progress[i]['level2'].totatQuestions}}</span>
+                    <div class="ion-justify-content-center" *ngIf="is_start[i]==1">
+                        <span meter3 *ngIf="progress[i]['level3']">Completed</span>
+                        <span meter3 *ngIf="!progress[i]['level3']">Not Completed</span>
                     </div>
-
+                    <div class="ion-justify-content-center" *ngIf="is_start[i]==0">
+                        <span meter3>Not Started</span>
+                    </div>
                 </ion-col>
             </ion-row>
-            <div>
-                <h2>
-                    Level 3:
-                </h2>
-                <div>
-                    <span meter3 *ngIf="progress[i]['level3']">Completed</span>
-                    <span meter3 *ngIf="!progress[i]['level3']">Not Completed</span>
-                </div>
-            </div>
 
         </ion-grid>
-
-        <ion-grid *ngIf="is_shown[i]==1 && progress[i]!=undefined && progress[i].length==0 ">
-            <ion-row>
-                Level 1 Score : Not Started
-            </ion-row>
-            <ion-row>
-                Level 2 Score : Not Started
-            </ion-row>
-            <ion-row>
-                Level 3 Score : Not Started
-            </ion-row>
-        </ion-grid>
-
 
     </ion-card>
     <center>
