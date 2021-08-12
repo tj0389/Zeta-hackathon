@@ -73,7 +73,7 @@ export class Level3Page implements OnInit {
   checkOTP() {
     this.menuCtrl.enable(true);
     this.navCtrl.navigateRoot('home');
-    this.shared.current_level=4;
+    this.shared.current_level=Math.max(this.shared.current_level,4);
     this.shared.is_transaction_complete=true;
     this.shared.savescore(1);
   }

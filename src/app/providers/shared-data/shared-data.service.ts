@@ -33,6 +33,7 @@ export class SharedDataService {
   is_level2_complete:boolean=false;
   mcqs=null;
   is_timer:boolean=false;
+  mcq_count:number=0;
   mcq_score_count;
   max_mcq_level2:number=10;
   original_mcqs: any = (level2_data as any).default;

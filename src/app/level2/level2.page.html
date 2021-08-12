@@ -33,7 +33,7 @@
                 <ion-label (click)="checked(i)">{{entry}}</ion-label>
             </ion-col>
         </ion-row>
-
+        
         <ion-row>
             <ion-button left (click)="prevques()" expand="block">Prev</ion-button>
             <ion-button right *ngIf="id<max_mcqs_no" (click)="nextques(id)" expand="block">Next</ion-button>
@@ -46,7 +46,8 @@
 
         <img class="congrts" src="../../assets/pngwing.com.png" height="200px" width="200px">
         <ion-row center style="margin:20px 0px; font-size: 16px;"> You have successfully completed Level 2</ion-row>
-        <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Score is {{shared.level2_score}}</ion-row>
+        <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Current Score is {{shared.mcq_count}}</ion-row>
+        <ion-row center style="margin:20px 0px; font-weight: bold;"> Your Best Score is {{shared.level2_score}}</ion-row>
         <ion-row center style="margin:20px 0px;">Now , Proceed to Level 3 for more Fun</ion-row>
         <ion-row>
             <ion-button left (click)="openpage('level2')" expand="block">Re-Test</ion-button>

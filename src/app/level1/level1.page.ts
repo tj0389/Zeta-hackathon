@@ -67,7 +67,7 @@ export class Level1Page implements OnInit {
   async nextques(id:number){
     if(id == this.max_passage_no){
       this.alertHandler();
-      this.shared.current_level=2;
+      this.shared.current_level=Math.max(this.shared.current_level,2);
       this.shared.savedata();
       this.navCtrl.navigateRoot(['level1',{id:id}])
     }

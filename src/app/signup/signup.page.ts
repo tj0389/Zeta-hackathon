@@ -176,7 +176,8 @@ export class SignupPage implements OnInit {
     // console.log(res); 
   }
   
-  changerole(type){
+  changerole(type){ 
+    this.child=[];
     if (this.userType!=type)
       this.flag=!this.flag
     this.userType=type;

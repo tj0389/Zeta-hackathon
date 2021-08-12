@@ -130,16 +130,16 @@ export class Level2Page implements OnInit {
     this.resettimer();
     this.menuCtrl.enable(true);
     this.navCtrl.navigateRoot(['level2',{id:this.max_mcqs_no}]);
-    let mcq_score:number=0;
+    this.shared.mcq_count=0;
     this.shared.mcq_score_count.forEach((value,index) => {
       if (value==1){
-        mcq_score+=1;
+        this.shared.mcq_count+=1;
       }
     });
-    if (mcq_score>this.shared.level2_score){
-      this.shared.level2_score=mcq_score;
+    if (this.shared.mcq_count>this.shared.level2_score){
+      this.shared.level2_score=this.shared.mcq_count;
     }
-    this.shared.current_level=3;
+    this.shared.current_level=Math.max(this.shared.current_level,3);
     this.shared.savescore(1);
     // localStorage.setItem('is_level2_complete',String(true));
     // this.shared.is_level2_complete=true;
