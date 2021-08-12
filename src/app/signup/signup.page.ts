@@ -128,7 +128,6 @@ export class SignupPage implements OnInit {
   }
   
   signin(){
-    console.log(this.child);
     let data = { firstName: this.firstName,lastName: this.lastName,email: this.email,mobile:this.mobile,userType: this.userType,password: this.password,childrenId: this.child};
     this.showLoader();
     this.authService.postData(data, 'registerUser').then(async (result) => {

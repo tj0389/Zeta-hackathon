@@ -42,7 +42,8 @@ export class AppComponent implements OnInit {
   }
   
   async logout(){
-    await this.shared.savescore(0);
+    if (this.shared.user.userType=='2')
+      await this.shared.savescore(0);
     localStorage.clear();
     this.shared.user['isLogin']=false;
     this.shared.user['firstName']='Guest';
