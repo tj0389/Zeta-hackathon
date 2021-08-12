@@ -26,9 +26,9 @@
         </div>
         <ion-row>
             <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
-            <ion-button left [disabled]="flag" (click)="prevques()" expand="block">Prev</ion-button>
-            <ion-button right [disabled]="flag" *ngIf="id<max_passage_no" (click)="nextques(id)" expand="block">Next</ion-button>
-            <ion-button right [disabled]="flag" *ngIf="id==max_passage_no" (click)="nextques(id)" expand="block">Finish</ion-button>
+            <ion-button lefts [disabled]="flag" (click)="prevques()" expand="block">Prev</ion-button>
+            <ion-button rights [disabled]="flag" *ngIf="id<max_passage_no" (click)="nextques(id)" expand="block">Next</ion-button>
+            <ion-button rights [disabled]="flag" *ngIf="id==max_passage_no" (click)="nextques(id)" expand="block">Finish</ion-button>
         </ion-row>
 
     </ion-grid>

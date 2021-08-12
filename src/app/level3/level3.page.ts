@@ -82,6 +82,7 @@ export class Level3Page implements OnInit {
     this.shared.current_level=Math.max(this.shared.current_level,4);
     this.shared.is_transaction_complete=true;
     this.shared.savescore(1);
+    this.navCtrl.navigateRoot('home');
   }
   
   cancel(){

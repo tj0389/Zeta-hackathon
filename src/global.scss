@@ -47,6 +47,18 @@ ion-item {
     margin: 20px;
 }
 
+[lefts]{
+    position: relative;
+    bottom: 10px;
+    left: 10px;
+}
+
+[rights]{
+    position: relative;
+    bottom: 10px;
+    left: 160px;
+}
+
 [right] {
     position: fixed;
     bottom: 10px;
