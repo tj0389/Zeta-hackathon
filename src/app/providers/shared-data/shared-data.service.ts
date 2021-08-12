@@ -27,7 +27,8 @@ export class SharedDataService {
   level1_score:number=0;
   original_passage: any = (level1_data as any).default;
   is_level1_complete:boolean=false;
-  
+  max_mcq_level1:number;
+
   // level 2
   level2_score:number=0;
   is_level2_complete:boolean=false;
@@ -52,6 +53,7 @@ export class SharedDataService {
   is_transaction_complete:boolean=false;
   
   constructor(public authService:AuthService) {
+    this.max_mcq_level1=this.original_passage.length;
     this.min=this.level2_time_min;
     this.sec=this.level2_time_sec;
     this.savedata();
@@ -98,7 +100,7 @@ export class SharedDataService {
   };
   
   async savescore(index:number){
-    let data={email:this.user.email,currentLevel:this.current_level,level1:this.level1_score,level2:{"totatQuestions": this.max_mcq_level2,"correct": this.level2_score},level3: this.is_transaction_complete};
+    let data={email:this.user.email,currentLevel:this.current_level,level1:{"totatQuestions": this.max_mcq_level1,"read": this.level1_score},level2:{"totatQuestions": this.max_mcq_level2,"correct": this.level2_score},level3: this.is_transaction_complete};
     this.authService.postData(data, 'updateProgress').then(async (result) => {
       console.log(result);
       if (result['status'] == 'success') {
@@ -106,7 +108,7 @@ export class SharedDataService {
           let keys=Object.keys(result['data']);
           keys.forEach((key, index) => {
             if (key=='email'){}
-            else if (key=='level2')
+            else if (key=='level2' || key=='level1')
               localStorage.setItem(key,JSON.stringify(result['data'][key]));
             else
               localStorage.setItem(key,result['data'][key]);
@@ -123,15 +125,15 @@ export class SharedDataService {
     this.authService.postData(data, 'getProgress').then(async (result) => {
       console.log(result);
       if (result['status'] == 'success') {
-        this.level1_score=result['data']['level1'];
+        this.level1_score=result['data']['level1'].read;
         this.level2_score=result['data']['level2'].correct;
         this.is_transaction_complete=result['data']['level3'];
         this.current_level=result['data']['currentLevel'];
-        // console.log(result['data']['level1'],result['data']['level2'].correct,result['data']['level3'])
+        // console.log(result['data']['level1'].read,result['data']['level2'].correct,result['data']['level3'])
         let keys=Object.keys(result['data']);
         keys.forEach((key, index) => {
           if (key=='email'){}
-          else if (key=='level2')
+          else if (key=='level2' || key=='level1')
             localStorage.setItem(key,JSON.stringify(result['data'][key]));
           else
             localStorage.setItem(key,result['data'][key]);

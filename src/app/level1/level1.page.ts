@@ -36,9 +36,9 @@ export class Level1Page implements OnInit {
     this.isdisabled(); 
     let score:number=this.id;
     let pre_score:number=0;
-    let val=localStorage.getItem('level1');
-    if (val!=null && val!=undefined && val!=''){
-      pre_score=Number(val);
+    let val=JSON.parse(localStorage.getItem('level1'));
+    if (val.read!=null && val.read!=undefined && val.read!=''){
+      pre_score=val.read;
       if (score>pre_score)
         this.shared.level1_score=score;
         this.shared.savescore(1);
