@@ -182,4 +182,11 @@ export class SignupPage implements OnInit {
       this.flag=!this.flag
     this.userType=type;
   }
+
+  deleteChild(c){
+      console.log(c)
+      this.child = this.child.filter((val)=>{
+        return c != val
+      })
+  }
 }

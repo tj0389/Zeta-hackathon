@@ -23,3 +23,7 @@ ion-item {
     margin: 10px;
     --highlight-color-valid: var(--ion-color-primary) !important;
 }
+
+ion-back-button {
+    display: inline;
+}
