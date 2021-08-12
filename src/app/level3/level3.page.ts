@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { NavController, MenuController, AlertController } from '@ionic/angular';
+import { NavController, MenuController, AlertController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
 
@@ -18,7 +18,7 @@ export class Level3Page implements OnInit {
   amount;
   otp;
 
-  constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute,private menuCtrl:MenuController,public alertCtrl:AlertController) {
+  constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute,private menuCtrl:MenuController,public alertCtrl:AlertController,public loadingCtrl:LoadingController) {
 
     this.shared.otptime=this.shared.otp_time;
 
@@ -35,7 +35,6 @@ export class Level3Page implements OnInit {
   
   nextpage(id:number){
     if (id==0){
-      console.log(this.shared.current_level);
       if (this.shared.current_level<3){
         this.alertCtrl.create({
           header : `Alert!`,
@@ -59,8 +58,16 @@ export class Level3Page implements OnInit {
       this.navCtrl.navigateForward(['level3',{id:id}]);
   }
 
+  isempty(){
+    if (this.upiid==null || this.upiid==undefined || this.upiid=='')
+      return true;
+    if (this.amount==null || this.amount==undefined || this.amount=='')
+      return true;
+    return false;
+  }
+
   sendotp(){
-    console.log('sending');
+    let val=Math.floor(100000 + Math.random() * 900000);
   }
   
   async setTime(){
@@ -70,9 +77,8 @@ export class Level3Page implements OnInit {
     }
   }
   
-  checkOTP() {
+  async checkOTP() {
     this.menuCtrl.enable(true);
-    this.navCtrl.navigateRoot('home');
     this.shared.current_level=Math.max(this.shared.current_level,4);
     this.shared.is_transaction_complete=true;
     this.shared.savescore(1);
