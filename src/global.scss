@@ -111,3 +111,35 @@ ion-item {
     margin: 10px;
     padding: 5px;
 }
+
+[meter] {
+    font-size: 2em;
+    margin-left: 20px;
+    color: var(--ion-color-primary);
+    font-weight: bolder;
+    text-shadow: 0px 0px 1px black;
+}
+
+[meter1] {
+    margin-left: 10px;
+}
+
+[btn] {
+    --background: transparent;
+    color: var(--ion-color-light);
+    --box-shadow: none;
+    margin-bottom: 0px;
+    display: block;
+}
+
+[h3] {
+    color: var(--ion-color-light);
+}
+
+[meter3] {
+    font-size: 1.5em;
+    margin-left: 20px;
+    color: var(--ion-color-primary);
+    font-weight: bolder;
+    text-shadow: 0px 0px 1px black;
+}

@@ -4,7 +4,7 @@ import { NavController, AlertController, LoadingController } from '@ionic/angula
 import { AuthService } from '../providers/auth/auth.service';
 import { GlobalVarsService } from '../providers/global-vars/global-vars.service';
 import { SharedDataService } from '../providers/shared-data/shared-data.service';
-
+// import {Chart} from 'chart.js'
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',

@@ -8,72 +8,96 @@
 </ion-header>
 
 <ion-content *ngIf="shared.user.userType=='2'" [fullscreen]="true">
-  <ion-card class="card">
-    <ion-card-title><u>Level 1</u></ion-card-title>
-    <ion-card-content>
-      Read all the necessary questions and answers about the financial services or transaction you need to know.
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="card">
-    <ion-card-title><u>Level 2</u></ion-card-title>
-    <ion-card-content>
-      Solve some MCQ'S
-    </ion-card-content>
-  </ion-card>
-  <ion-card class="card">
-    <ion-card-title><u>Level 3</u></ion-card-title>
-    <ion-card-content>
-      Run Simulation.
-    </ion-card-content>
-  </ion-card>
+    <ion-card class="card">
+        <ion-card-title><u>Level 1</u></ion-card-title>
+        <ion-card-content>
+            Read all the necessary questions and answers about the financial services or transaction you need to know.
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="card">
+        <ion-card-title><u>Level 2</u></ion-card-title>
+        <ion-card-content>
+            Solve some MCQ'S
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="card">
+        <ion-card-title><u>Level 3</u></ion-card-title>
+        <ion-card-content>
+            Run Simulation.
+        </ion-card-content>
+    </ion-card>
     <ion-button right (click)="openpage()" expand="block" btn>Start</ion-button>
 </ion-content>
 
 <ion-content *ngIf="shared.user.userType=='1'" [fullscreen]="true">
-  <ion-card *ngFor="let child of shared.user.childrenId;index as i">
-    <ion-card-header>
-      {{child}}  <ion-button *ngIf="is_shown[i]==0" (click)="showprogress(i)">View Progress</ion-button>
-                  <ion-button *ngIf="is_shown[i]==1" (click)="is_shown[i]=1-is_shown[i]">Hide Progress</ion-button>
-    </ion-card-header>
-    
-    <ion-grid *ngIf="is_shown[i]==1 && progress[i]!=undefined && progress[i].length!=0">
-      <ion-row>
-        Level 1 Score : {{progress[i]['level1']}}
-      </ion-row>
-      <ion-row>
-        Level 2 Score : Total Ques - {{progress[i]['level2'].totatQuestions}}  Correct - {{progress[i]['level2'].correct}}
-      </ion-row>
-      <ion-row>
-        Level 3 Score : {{progress[i]['level3']}}
-      </ion-row>
-    </ion-grid>
+    <ion-card *ngFor="let child of shared.user.childrenId;index as i">
+        <ion-card-header>
+            <h3 h3>{{child}}</h3>
+            <ion-button *ngIf="is_shown[i]==0" (click)="showprogress(i)" btn>View Progress</ion-button>
+            <ion-button *ngIf="is_shown[i]==1" (click)="is_shown[i]=1-is_shown[i]" btn>Hide Progress</ion-button>
+        </ion-card-header>
 
-    <ion-grid *ngIf="is_shown[i]==1 && progress[i]!=undefined && progress[i].length==0">
-      <ion-row>
-        Level 1 Score : Not Started
-      </ion-row>
-      <ion-row>
-        Level 2 Score : Not Started
-      </ion-row>
-      <ion-row>
-        Level 3 Score : Not Started
-      </ion-row>
-    </ion-grid>
-    
-  
-  </ion-card>
+        <ion-grid *ngIf="is_shown[i]==1 && progress[i]!=undefined && progress[i].length!=0" div>
+            <ion-row>
+                <ion-col size="6">
 
-  <ion-label *ngIf="flag==false" (click)="flag=true">Click to add more child</ion-label>
-  <ion-label *ngIf="flag==true" (click)="flag=false">Click to cancel</ion-label>
+                    <h2>
+                        Level 1:
+                    </h2>
+                    <div>
+                        <span meter>{{progress[i]['level1'].read}}</span><span meter1>/{{progress[i]['level1'].totatQuestions}}</span>
+                    </div>
 
-  <ion-item *ngIf="flag==true">
-    <ion-label position="floating">
-        Child Email:
-    </ion-label>
-    <ion-input [(ngModel)]="ch">
-    </ion-input>
-  </ion-item>
-  
-  <ion-button *ngIf="flag==true" (click)="addchild()">Add Child</ion-button>
+                </ion-col>
+                <ion-col size="6">
+
+                    <h2>
+                        Level 2:
+                    </h2>
+                    <div>
+                        <span meter>{{progress[i]['level2'].correct}}</span><span meter1>/{{progress[i]['level2'].totatQuestions}}</span>
+                    </div>
+
+                </ion-col>
+            </ion-row>
+            <div>
+                <h2>
+                    Level 3:
+                </h2>
+                <div>
+                    <span meter3 *ngIf="progress[i]['level3']">Completed</span>
+                    <span meter3 *ngIf="!progress[i]['level3']">Not Completed</span>
+                </div>
+            </div>
+
+        </ion-grid>
+
+        <ion-grid *ngIf="is_shown[i]==1 && progress[i]!=undefined && progress[i].length==0 ">
+            <ion-row>
+                Level 1 Score : Not Started
+            </ion-row>
+            <ion-row>
+                Level 2 Score : Not Started
+            </ion-row>
+            <ion-row>
+                Level 3 Score : Not Started
+            </ion-row>
+        </ion-grid>
+
+
+    </ion-card>
+
+    <ion-label *ngIf="flag==false " (click)="flag=true ">Click to add more child</ion-label>
+    <ion-label *ngIf="flag==true " (click)="flag=false ">Click to cancel</ion-label>
+
+    <ion-item *ngIf="flag==true ">
+        <ion-label position="floating ">
+            Child Email:
+        </ion-label>
+        <ion-input [(ngModel)]="ch ">
+        </ion-input>
+    </ion-item>
+
+    <ion-button *ngIf="flag==true " (click)="addchild() ">Add Child</ion-button>
 
 </ion-content>
