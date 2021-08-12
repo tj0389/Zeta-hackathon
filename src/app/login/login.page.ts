@@ -98,7 +98,7 @@ export class LoginPage implements OnInit {
   }
   
   signUp() {
-    this.navCtrl.navigateRoot('signup');
+    this.navCtrl.navigateForward('signup');
   }
 
   async showLoader(){
