@@ -1,9 +1,17 @@
 <ion-content>
-
     <ion-grid class="form">
-        <center>
-            <h1 style="padding-bottom: 10px;transform: scale(1.2);">SignUp</h1>
-        </center>
+
+
+
+        <ion-toolbar style="--background: transparent !important;">
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="login" slot="start"></ion-back-button>
+            </ion-buttons>
+            <ion-title style="position: relative;top:-4px;">
+                <h1>SignUp</h1>
+            </ion-title>
+        </ion-toolbar>
+
         <ion-item>
             <ion-label position="floating">
                 First Name<span style="color: red;">&nbsp;*</span>
@@ -61,7 +69,7 @@
             </ion-label>
             <ion-input [(ngModel)]="ch">
             </ion-input>
-        
+
         </ion-item>
         <center>
             <ion-button *ngIf="userType==1" (click)="ChildrenUpdation()">Add Child</ion-button>
@@ -69,8 +77,8 @@
         <center>
             <div *ngIf="userType==1" class="container">
                 <span *ngFor="let items of child" child>
-                {{items}}
-            </span>
+                {{items}}  <span style="position: relative;top:2px;" (click)="deleteChild(items)"><ion-icon name="close"></ion-icon></span>
+                </span>
             </div>
         </center>
         <ion-item>
