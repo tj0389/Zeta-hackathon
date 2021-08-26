@@ -1,12 +1,81 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
 
+
+    <ion-grid class="form">
+        <ion-toolbar style="--background: transparent !important;">
+            <ion-buttons slot="start">
+                <ion-menu-button slot="start"></ion-menu-button>
+            </ion-buttons>
+            <ion-title style="position: relative;top:-4px;">
+                <h1>My Profile</h1>
+            </ion-title>
+        </ion-toolbar>
+        <ion-item>
+            <ion-label position="floating">
+                First Name
+            </ion-label>
+            <ion-input [(ngModel)]="first">
+
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">
+                Last Name
+            </ion-label>
+            <ion-input [(ngModel)]="last">
+
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                Mobile No.<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="mobile">
+
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                Pan Card No.<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="pan">
+
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                Date of Birth<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-datetime [(ngModel)]="dob"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                Email<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input [(ngModel)]="email" type="email">
+
+            </ion-input>
+        </ion-item>
+        <ion-item lines="full">
+            <ion-col size="4">
+                <ion-label>Gender</ion-label>
+            </ion-col>
+            <ion-col (click)="changerole(male)" size="4">
+                <ion-checkbox [checked]="flag == 'male'"></ion-checkbox>
+                <ion-label>Male</ion-label>
+            </ion-col>
+            <ion-col (click)="changerole(female)" size="4">
+                <ion-checkbox [checked]="flag == 'female'"></ion-checkbox>
+                <ion-label>Female</ion-label>
+            </ion-col>
+        </ion-item>
+
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="submitHandler()" expand="block" shape="round">Create Profile</ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
 </ion-content>
