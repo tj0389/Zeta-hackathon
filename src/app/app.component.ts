@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     }
     else{
       this.appPages = [
+        { title: 'My Profile', url: '/profile', icon: 'home'},
         { title: 'Home', url: '/home', icon: 'home'},
         { title: 'Level1', url: '/level1', icon: 'home'},
         { title: 'Level2', url: '/level2', icon: 'home'},
