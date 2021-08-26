@@ -51,7 +51,7 @@
             <ion-input [(ngModel)]="amount"></ion-input>
         </ion-item>
 
-        <ion-button right (click)="nextpage(id)" expand="block">Pay</ion-button>
+        <ion-button [disabled]="isempty()" right (click)="nextpage(id)" expand="block">Pay</ion-button>
 
     </div>
     

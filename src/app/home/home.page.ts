@@ -19,6 +19,7 @@ export class homePage implements OnInit {
   flag:boolean=false;
   is_shown;
   progress;
+  is_start;
   
   constructor(public authService:AuthService,private navCtrl:NavController,public shared:SharedDataService,public alertCtrl:AlertController,public loadingCtrl:LoadingController) {
     if (this.shared.user.userType=='2')
@@ -26,8 +27,10 @@ export class homePage implements OnInit {
     if (this.shared.user.userType=='1'){
       this.is_shown= new Array(this.shared.user.childrenId.length);
       this.is_shown.fill(0);
+      this.is_start= new Array(this.shared.user.childrenId.length);
+      this.is_start.fill(0);
       this.progress= new Array(this.shared.user.childrenId.length);
-      // this.progress.fill([]);
+      this.progress.fill([]);
     }
     this.flag=false;
   }
@@ -65,8 +68,10 @@ export class homePage implements OnInit {
           this.shared.savedata();
           this.is_shown= new Array(this.shared.user.childrenId.length);
           this.is_shown.fill(0);
+          this.is_start= new Array(this.shared.user.childrenId.length);
+          this.is_start.fill(0);
           this.progress= new Array(this.shared.user.childrenId.length);
-          // this.progress.fill([]);
+          this.progress.fill([]);
         }
         else
         {
@@ -94,9 +99,22 @@ export class homePage implements OnInit {
     }
   }
   
-  showprogress(index){
-    this.is_shown[index]=1-this.is_shown[index];
-    this.getprogress(index);
+  showprogress(idx){
+    let data={email:this.shared.user.childrenId[idx]};
+    this.authService.postData(data, 'getProgress').then((result) => {
+      console.log(result);
+      if (result['status'] == 'success') {
+        this.is_start[idx]=1;
+        this.progress[idx]=result['data'];
+        this.is_shown[idx]=1-this.is_shown[idx];
+      }
+      else{
+        this.is_shown[idx]=1-this.is_shown[idx];
+        this.progress[idx]=result['data'];
+      }
+    },async(err) => {
+      console.log(err);
+    });
   }
 
   openpage(){
@@ -111,19 +129,4 @@ export class homePage implements OnInit {
     await this.loading.present();
   }
 
-  getprogress(idx){
-    let data={email:this.shared.user.childrenId[idx]};
-    this.authService.postData(data, 'getProgress').then(async (result) => {
-      console.log(result);
-      if (result['status'] == 'success') {
-        this.progress[idx]=result['data'];
-        console.log(this.progress[idx]);
-      }
-      else{
-        this.progress[idx]=[];
-      }
-    },async (err) => {
-      console.log(err);
-    });
-  }
 }

@@ -4,7 +4,7 @@
             <ion-menu-button *ngIf="id==0 || id>max_passage_no"></ion-menu-button>
         </ion-buttons>
         <ion-title *ngIf="id==0 || id>max_passage_no">Level 1</ion-title>
-        <ion-title *ngIf="id!=0 && id<=max_passage_no">Question {{id}}</ion-title>
+        <ion-title *ngIf="id!=0 && id<=max_passage_no">Passage {{id}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -19,17 +19,16 @@
 
         <ion-button right (click)="nextques(id)" expand="block">Start</ion-button>
     </div>
-
+    
     <ion-grid *ngIf="id!=0 && id<=max_passage_no">
         <div div>
-            <span style="font-weight: bold;">{{shared.passage[id-1].question}}</span>
-            <span> {{shared.passage[id-1].answer}}</span>
+            <div [innerHTML]="shared.passage[id-1].Desc"></div>
         </div>
         <ion-row>
             <!-- <ion-button (click)="prevques()" expand="block">Prev</ion-button> -->
-            <ion-button left [disabled]="flag" (click)="prevques()" expand="block">Prev</ion-button>
-            <ion-button right [disabled]="flag" *ngIf="id<max_passage_no" (click)="nextques(id)" expand="block">Next</ion-button>
-            <ion-button right [disabled]="flag" *ngIf="id==max_passage_no" (click)="nextques(id)" expand="block">Finish</ion-button>
+            <ion-button lefts [disabled]="flag" (click)="prevques()" expand="block">Prev</ion-button>
+            <ion-button rights [disabled]="flag" *ngIf="id<max_passage_no" (click)="nextques(id)" expand="block">Next</ion-button>
+            <ion-button rights [disabled]="flag" *ngIf="id==max_passage_no" (click)="nextques(id)" expand="block">Finish</ion-button>
         </ion-row>
 
     </ion-grid>

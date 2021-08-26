@@ -40,7 +40,7 @@ export class Level1Page implements OnInit {
     console.log(score);
     let pre_score:number=0;
     let val=JSON.parse(localStorage.getItem('level1'));
-    if (val.read!=null && val.read!=undefined && val.read!=''){
+    if (val!=null && val!=undefined && val!=''){
       pre_score=val.read;
       if (score>pre_score)
         this.shared.level1_score=score;
