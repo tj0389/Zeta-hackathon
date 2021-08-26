@@ -20,7 +20,7 @@ export class homePage implements OnInit {
   is_shown;
   progress;
   is_start;
-  
+  load = false;
   constructor(public authService:AuthService,private navCtrl:NavController,public shared:SharedDataService,public alertCtrl:AlertController,public loadingCtrl:LoadingController) {
     if (this.shared.user.userType=='2')
       this.shared.getscore();
@@ -101,10 +101,13 @@ export class homePage implements OnInit {
   
   showprogress(idx){
     let data={email:this.shared.user.childrenId[idx]};
+    this.load = true
     this.authService.postData(data, 'getProgress').then((result) => {
       console.log(result);
+  
       if (result['status'] == 'success') {
         this.is_start[idx]=1;
+        this.load = false
         this.progress[idx]=result['data'];
         this.is_shown[idx]=1-this.is_shown[idx];
       }

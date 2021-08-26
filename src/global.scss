@@ -47,16 +47,16 @@ ion-item {
     margin: 20px;
 }
 
-[lefts]{
+[lefts] {
     position: relative;
     bottom: 10px;
     left: 10px;
 }
 
-[rights]{
+[rights] {
     position: relative;
     bottom: 10px;
-    left: 160px;
+    left: 180px;
 }
 
 [right] {
@@ -115,6 +115,8 @@ ion-item {
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
+    background: linear-gradient(145deg, #7da6fd, var(--ion-color-primary));
+    box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
 }
 
 .form {
@@ -122,6 +124,8 @@ ion-item {
     background-color: rgb(202, 232, 241);
     margin: 10px;
     padding: 5px;
+    background: linear-gradient(145deg, rgb(187, 220, 231), rgb(202, 232, 241));
+    box-shadow: 5px 5px 20px #e0e0e0, -5px -5px 20px #ffffff;
 }
 
 [meter] {
