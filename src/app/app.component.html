@@ -12,6 +12,9 @@
                     <div style="margin-bottom: 10px;">{{shared.user['email']}}</div>
 
                     <ion-menu-toggle auto-hide="false">
+                        <ion-item *ngIf="shared.user['userType']=='2'" routerDirection="root" routerLink="/profile" lines="none" detail="false" routerLinkActive="selected">
+                            <ion-label>My Profile</ion-label>
+                        </ion-item>
                         <ion-item routerDirection="root" routerLink="/home" lines="none" detail="false" routerLinkActive="selected">
                             <ion-label>Home</ion-label>
                         </ion-item>
