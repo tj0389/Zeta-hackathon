@@ -9,8 +9,12 @@
 </ion-header>
 
 <ion-content>
+    
+    <div *ngIf="id==0">
+        <ion-button (click)="setup()" expand="block">Setup Account</ion-button>
+    </div>
 
-    <div *ngIf="id==0" div>
+    <div *ngIf="id==1" div>
         <div class="card">
             <div class="card-number">
                 <p>Card Number</p>
@@ -39,7 +43,7 @@
 
     </div>
 
-    <div *ngIf="id==1" div level3>
+    <div *ngIf="id==2" div level3>
 
         <ion-item>
             <ion-label position="floating">UPI ID</ion-label>
@@ -55,7 +59,7 @@
 
     </div>
 
-    <div *ngIf="id==2" div level3>
+    <div *ngIf="id==3" div level3>
 
         <ion-item>
             <ion-label position="floating">OTP</ion-label>
