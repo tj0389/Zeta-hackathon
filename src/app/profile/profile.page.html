@@ -14,24 +14,28 @@
             <ion-label position="floating">
                 First Name
             </ion-label>
-            <ion-input [(ngModel)]="first">
-
-            </ion-input>
+            <ion-input disabled="true" [(ngModel)]="shared.user.firstName"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label position="floating">
                 Last Name
             </ion-label>
-            <ion-input [(ngModel)]="last">
-
-            </ion-input>
+            <ion-input disabled="true" [(ngModel)]="shared.user.lastName"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label position="floating">
                 Mobile No.<span style="color: red;">&nbsp;*</span>
             </ion-label>
-            <ion-input [(ngModel)]="mobile">
+            <ion-input disabled="true" [(ngModel)]="shared.user.mobile">
+
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                Email<span style="color: red;">&nbsp;*</span>
+            </ion-label>
+            <ion-input disabled="true" [(ngModel)]="shared.user.email" type="email">
 
             </ion-input>
         </ion-item>
@@ -49,14 +53,7 @@
             </ion-label>
             <ion-datetime [(ngModel)]="dob"></ion-datetime>
         </ion-item>
-        <ion-item>
-            <ion-label position="floating">
-                Email<span style="color: red;">&nbsp;*</span>
-            </ion-label>
-            <ion-input [(ngModel)]="email" type="email">
-
-            </ion-input>
-        </ion-item>
+       
         <ion-item lines="full">
             <ion-col size="4">
                 <ion-label>Gender</ion-label>
