@@ -10,11 +10,11 @@
 
 <ion-content>
     
-    <div *ngIf="id==0 && shared.user.individualID==''">
+    <div *ngIf="id==0 && shared.user.data.accountID==''">
         <ion-button (click)="setup()" expand="block">Setup Account</ion-button>
     </div>
     
-    <div *ngIf="id==1" div>
+    <div *ngIf="id==0 && shared.user.data.accountID!=''" div>
         <div class="card">
             <div class="card-number">
                 <p>Card Number</p>
@@ -31,39 +31,39 @@
             </div>
         </div>
         
-        <center>
+        <center>    
             <h3>Your Tasks</h3>
             <ion-card>
                 <ion-card-content>
-                    Pay Rs 10 to UPI ID 9876543210@apl
+                    Pay Rs 100 to account No. - 123456789
                 </ion-card-content>
-                <ion-button (click)="nextpage(id)" expand="block">Start </ion-button>
+                <ion-button [disabled]="shared.is_transaction_complete" (click)="nextpage(id)" expand="block">Start </ion-button>
             </ion-card>
         </center>
+
+    </div>
+
+    <div *ngIf="id==1" div level3>
+
+        <ion-item>
+            <ion-label position="floating">Account No.</ion-label>
+            <ion-input disabled="true" [(ngModel)]="upiid"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input disabled="true" [(ngModel)]="amount"></ion-input>
+        </ion-item>
+        
+        <ion-button [disabled]="isempty()" right (click)="nextpage(id)" expand="block">Pay</ion-button>
 
     </div>
 
     <div *ngIf="id==2" div level3>
 
         <ion-item>
-            <ion-label position="floating">UPI ID</ion-label>
-            <ion-input [(ngModel)]="upiid"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label position="floating">Amount</ion-label>
-            <ion-input [(ngModel)]="amount"></ion-input>
-        </ion-item>
-
-        <ion-button [disabled]="isempty()" right (click)="nextpage(id)" expand="block">Pay</ion-button>
-
-    </div>
-
-    <div *ngIf="id==3" div level3>
-
-        <ion-item>
             <ion-label position="floating">OTP</ion-label>
-            <ion-input [(ngModel)]="otp"></ion-input>
+            <ion-input disabled="true" [(ngModel)]="otp"></ion-input>
         </ion-item>
 
         <ion-button left (click)="cancel()" expand="block">cancel</ion-button>

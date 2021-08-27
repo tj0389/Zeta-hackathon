@@ -15,9 +15,9 @@ export class Level3Page implements OnInit {
   id:number;
   cardnumber;
   cvv;
-  upiid;
-  amount;
-  otp;
+  upiid='123456789';
+  amount:number=100;
+  otp=Math.floor(100000 + Math.random() * 900000);
   loading: HTMLIonLoadingElement;
 
   constructor(public shared: SharedDataService,public navCtrl:NavController,private activatedRoute:ActivatedRoute,private menuCtrl:MenuController,public alertCtrl:AlertController,public loadingCtrl:LoadingController,private authService:AuthService) {
@@ -31,15 +31,13 @@ export class Level3Page implements OnInit {
     else
       this.id+=1;
 
-    if (shared.individualID=='')
-      navCtrl.navigateRoot(['level3',{id:1}])
   }
 
   ngOnInit() {
   }
   
   nextpage(id:number){
-    if (id==1){
+    if (id==0){
       if (this.shared.current_level<3){
         this.alertCtrl.create({
           header : `Alert!`,
@@ -55,7 +53,6 @@ export class Level3Page implements OnInit {
     }
     else if (id==1){
       this.setTime();
-      this.sendotp();
       this.menuCtrl.enable(false);
       this.navCtrl.navigateRoot(['level3',{id:id}]);
     }
@@ -66,13 +63,9 @@ export class Level3Page implements OnInit {
   isempty(){
     if (this.upiid==null || this.upiid==undefined || this.upiid=='')
       return true;
-    if (this.amount==null || this.amount==undefined || this.amount=='')
+    if (this.amount==null || this.amount==undefined)
       return true;
     return false;
-  }
-
-  sendotp(){
-    let val=Math.floor(100000 + Math.random() * 900000);
   }
   
   async setTime(){
@@ -83,11 +76,7 @@ export class Level3Page implements OnInit {
   }
   
   async checkOTP() {
-    this.menuCtrl.enable(true);
-    this.shared.current_level=Math.max(this.shared.current_level,4);
-    this.shared.is_transaction_complete=true;
-    this.shared.savescore(1);
-    this.navCtrl.navigateRoot('home');
+    this.transfermoney();
   }
   
   cancel(){
@@ -115,7 +104,18 @@ export class Level3Page implements OnInit {
   }
   
   setup(){
-    this.issueBundels();
+    if (this.shared.current_level<3){
+      this.alertCtrl.create({
+        header : `Alert!`,
+        message : `Level 2 is not completed`,
+      }).then(async (alert)=>{
+        alert.present();
+        await this.shared.delay(2000);
+        alert.dismiss();
+      })
+    }
+    else
+      this.issueBundels();
   }
   
   createAccountHolder(){
@@ -168,7 +168,7 @@ export class Level3Page implements OnInit {
         await this.loading.dismiss();
         console.log(result);
         if (result['status']=='APPROVED'){
-          this.shared.user.individualID=result['individualID'];
+          this.shared.user.data.individualID=result['individualID'];
           // this.issueBundels();
         }
         else{
@@ -207,8 +207,8 @@ export class Level3Page implements OnInit {
       await this.loading.dismiss();
       console.log(result);
       if (result['accounts']!=undefined && result['paymentInstruments']!=undefined){
-        this.shared.user.accountID=result['accounts'][0]['accountID'];
-        this.shared.user.resourceID=result['paymentInstruments'][0]['resourceID'];
+        this.shared.user.data.accountID=result['accounts'][0]['accountID'];
+        this.shared.user.data.resourceID=result['paymentInstruments'][0]['resourceID'];
         this.addmoney();
       }
       else{
@@ -230,7 +230,7 @@ export class Level3Page implements OnInit {
     });
   }
 
-  addmoney(){
+  addmoney(){ 
     let val=Math.floor(10000 + Math.random() * 90000);
     let data={
       "AUTH_TYPE": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwidGFnIjoiQS10WEJzbmc3MzFCbzdXX3VmTHFRdyIsImFsZyI6IkExMjhHQ01LVyIsIml2IjoibGtRN2l0Ukc3c1FIOWpwbyJ9.cqOfj-TsUgQwSjx2ch3ySm0ph44IQviWqVTfSAPN-A8.7rR5lMRvjRLKq_2hi158gw.H040En8DSMegkWH16maCRSleNW-ZpmGXFVUjZUgT9iuAYPRNlEIzjU1hCk1bnT18ic34tMVkeMMAiskJgOTyeA-627V_5C-y8xGIoSF6c5P9tEsu1cURX55EmFl5A4OAYb3xHJNYpueeWSsTMkyk60fg7ZA1ATr74B0QzEo1zKnjzZxQoZHYayWKlFmi-LSYic3lnDFgV35WEjveSzzPyOZQprTkDh5ee21QbJkER2lZWv5KqQge1ViOhi1UPWa1OjtJyAQGv86W17EQ2wA0_ESFUg3-kahwfhhr5_PxtWc_P698vQ-fFiXL0Qvra_-6erzJcvy4ghUanp5k2xUNkR-nC_tX3lLqvAqL3Ad_PqdDdOPcGdd0qHPSJBDf6lB1.IKEnNxngSfQRGEunXf6b8w",
@@ -239,11 +239,11 @@ export class Level3Page implements OnInit {
       "requestID" : val,
       "amount": {
           "currency" : "INR",
-          "amount" : "100"
+          "amount" : "500"
       },
       "transferCode": "ATLAS_P2M_AUTH",
       "debitAccountID": "a27bce72-467e-463f-86cf-2e90b9baa3da",
-      "creditAccountID": this.shared.user.accountID,
+      "creditAccountID": this.shared.user.data.accountID,
       "transferTime": 1574741608001,
       "remarks": "AH-1 VBO  a/c",
       "attributes": {}
@@ -254,7 +254,6 @@ export class Level3Page implements OnInit {
       console.log(result);
       if (result['status']=='SUCCESS'){
         this.shared.savescore(1);
-        this.nextpage(0);
       }
       else{
         const alert = await this.alertCtrl.create({
@@ -276,6 +275,64 @@ export class Level3Page implements OnInit {
     });
   }
 
+  transfermoney(){
+    let val=Math.floor(10000 + Math.random() * 90000);
+    let data={
+      "AUTH_TYPE": "eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwidGFnIjoiQS10WEJzbmc3MzFCbzdXX3VmTHFRdyIsImFsZyI6IkExMjhHQ01LVyIsIml2IjoibGtRN2l0Ukc3c1FIOWpwbyJ9.cqOfj-TsUgQwSjx2ch3ySm0ph44IQviWqVTfSAPN-A8.7rR5lMRvjRLKq_2hi158gw.H040En8DSMegkWH16maCRSleNW-ZpmGXFVUjZUgT9iuAYPRNlEIzjU1hCk1bnT18ic34tMVkeMMAiskJgOTyeA-627V_5C-y8xGIoSF6c5P9tEsu1cURX55EmFl5A4OAYb3xHJNYpueeWSsTMkyk60fg7ZA1ATr74B0QzEo1zKnjzZxQoZHYayWKlFmi-LSYic3lnDFgV35WEjveSzzPyOZQprTkDh5ee21QbJkER2lZWv5KqQge1ViOhi1UPWa1OjtJyAQGv86W17EQ2wA0_ESFUg3-kahwfhhr5_PxtWc_P698vQ-fFiXL0Qvra_-6erzJcvy4ghUanp5k2xUNkR-nC_tX3lLqvAqL3Ad_PqdDdOPcGdd0qHPSJBDf6lB1.IKEnNxngSfQRGEunXf6b8w",
+      "requestCallType": "POST",
+      "url": "https://fusion.preprod.zeta.in/api/v1/ifi/140793/transfers",
+      "requestID" :val,
+      "amount": {
+          "currency" : "INR",
+          "amount" : "100"
+      },
+      "transferCode": "ATLAS_P2M_AUTH",
+      "debitAccountID": this.shared.user.data.accountID,
+      "creditAccountID": 'a27bce72-467e-463f-86cf-2e90b9baa3da',
+      "transferTime": 1574741608010,
+      "remarks": "AH-1 VBO  a/c",
+      "attributes": {}
+    }
+    this.showLoader();
+    this.authService.postData(data, 'hitZetaAPI').then(async (result) => {
+      await this.loading.dismiss();
+      console.log(result);
+      if (result['status']=='SUCCESS'){
+        const alert = await this.alertCtrl.create({
+          header: 'Success',
+          message: 'Transaction Successfully Completed',
+          buttons: ['OK'],
+        });
+        await alert.present();
+        this.menuCtrl.enable(true);
+        this.shared.current_level=Math.max(this.shared.current_level,4);
+        this.shared.is_transaction_complete=true;
+        this.shared.savescore(1);
+        this.navCtrl.navigateRoot('home');
+      }
+      else{
+        const alert = await this.alertCtrl.create({
+          header: 'Error',
+          message: 'Transaction Failed',
+          buttons: ['OK'],
+        });
+        await alert.present();
+        this.menuCtrl.enable(true);
+        this.shared.savescore(1);
+        this.navCtrl.navigateRoot('home');
+      }
+    }, async (err) => {
+      await this.loading.dismiss();
+      console.log(err);
+      const alert = await this.alertCtrl.create({
+        header: 'Error',
+        message: 'Something went wrong. Try again later',
+        buttons: ['OK'],
+      });
+      await alert.present();
+    });
+  }
+
   async showLoader(){
     this.loading = await this.loadingCtrl.create({
         message: 'Loading..',
@@ -283,5 +340,4 @@ export class Level3Page implements OnInit {
     await this.loading.present();
   }
 
-  
 }

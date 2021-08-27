@@ -18,9 +18,7 @@ export class SharedDataService {
     mobile: 0,
     childrenId: Array(0),
     panno:0,
-    individualID:'',
-    accountID:'',
-    resourceID:'',
+    data:{'accountID':'','individualID':'','resourceID':''}
   };
   
   individualID="cfaef7b3-565c-46b8-86ff-7625cace86e9"
@@ -67,7 +65,6 @@ export class SharedDataService {
     let val=localStorage.getItem('currentLevel');
     if (val!=null && val!=undefined && val!='')
       this.current_level=Number(val);
-    console.log(this.user,this.level1_score,this.level2_score,this.is_transaction_complete);
   }
   
   shuffle(array) {
@@ -96,7 +93,7 @@ export class SharedDataService {
     let keys=Object.keys(this.user);
     keys.forEach((key, index) => {
       if (localStorage.getItem(key)!=null && localStorage.getItem(key)!=undefined){
-        if (key=='childrenId')
+        if (key=='childrenId' || key=='data')
           this.user[key]=JSON.parse(localStorage.getItem(key));
         else
           this.user[key]=localStorage.getItem(key);
@@ -107,7 +104,7 @@ export class SharedDataService {
   };
   
   async savescore(index:number){
-    let data={email:this.user.email,currentLevel:this.current_level,level1:{"totatQuestions": this.max_mcq_level1,"read": this.level1_score},level2:{"totatQuestions": this.max_mcq_level2,"correct": this.level2_score},level3: this.is_transaction_complete, individualID:this.user.individualID,accountID:this.user.accountID,resourceID:this.user.resourceID};
+    let data={email:this.user.email,currentLevel:this.current_level,level1:{"totatQuestions": this.max_mcq_level1,"read": this.level1_score},level2:{"totatQuestions": this.max_mcq_level2,"correct": this.level2_score},level3: this.is_transaction_complete, data:{individualID:this.user.data.individualID,accountID:this.user.data.accountID,resourceID:this.user.data.resourceID}};
     this.authService.postData(data, 'updateProgress').then(async (result) => {
       console.log(result);
       if (result['status'] == 'success') {
@@ -115,7 +112,7 @@ export class SharedDataService {
           let keys=Object.keys(result['data']);
           keys.forEach((key, index) => {
             if (key=='email'){}
-            else if (key=='level2' || key=='level1')
+            else if (key=='level2' || key=='level1' || key=='data')
               localStorage.setItem(key,JSON.stringify(result['data'][key]));
             else
               localStorage.setItem(key,result['data'][key]);
@@ -140,7 +137,7 @@ export class SharedDataService {
         let keys=Object.keys(result['data']);
         keys.forEach((key, index) => {
           if (key=='email'){}
-          else if (key=='level2' || key=='level1')
+          else if (key=='level2' || key=='level1' || key=='data')
             localStorage.setItem(key,JSON.stringify(result['data'][key]));
           else
             localStorage.setItem(key,result['data'][key]);

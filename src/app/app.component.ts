@@ -53,6 +53,7 @@ export class AppComponent implements OnInit {
     this.shared.user['userType']='';
     this.shared.user['mobile']=0;
     this.shared.user['childrenId']=[];
+    this.shared.user['data']={'accountID':'','individualID':'','resourceID':''};
     this.navCtrl.navigateRoot(['login']);
     console.log(this.shared.user);
   }
