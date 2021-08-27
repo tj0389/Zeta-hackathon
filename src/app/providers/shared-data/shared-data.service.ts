@@ -17,8 +17,15 @@ export class SharedDataService {
     userType: '',
     mobile: 0,
     childrenId: Array(0),
+    panno:0,
+    individualID:'',
+    accountID:'',
+    resourceID:'',
   };
   
+  individualID="cfaef7b3-565c-46b8-86ff-7625cace86e9"
+  accountID:"4d45a6fe-0048-4cda-bcb0-8d3cc35ed21a"
+  resourceID:"945f4865-f0eb-477d-929d-da583cc0439f"
   current_level=0;
   
   //level 1
@@ -100,7 +107,7 @@ export class SharedDataService {
   };
   
   async savescore(index:number){
-    let data={email:this.user.email,currentLevel:this.current_level,level1:{"totatQuestions": this.max_mcq_level1,"read": this.level1_score},level2:{"totatQuestions": this.max_mcq_level2,"correct": this.level2_score},level3: this.is_transaction_complete};
+    let data={email:this.user.email,currentLevel:this.current_level,level1:{"totatQuestions": this.max_mcq_level1,"read": this.level1_score},level2:{"totatQuestions": this.max_mcq_level2,"correct": this.level2_score},level3: this.is_transaction_complete, individualID:this.user.individualID,accountID:this.user.accountID,resourceID:this.user.resourceID};
     this.authService.postData(data, 'updateProgress').then(async (result) => {
       console.log(result);
       if (result['status'] == 'success') {
