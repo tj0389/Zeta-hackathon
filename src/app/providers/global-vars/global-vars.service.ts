@@ -7,7 +7,7 @@ import { Platform } from '@ionic/angular';
 
 export class GlobalVarsService {
   public static file_url: string='https://karyarat2.0.dearsociety.in/';
-  public static api_url: string ='https://arcane-coast-34652.herokuapp.com/';
+  public static api_url: string ='https://zetaapi.herokuapp.com/';
   public static appurl : string;
   public static appversion : string="1.0.8";
   constructor(public platform : Platform) {
@@ -20,7 +20,7 @@ export class GlobalVarsService {
        GlobalVarsService.appurl='https://play.google.com/store/apps/details?id=app.softomatic.karyarat';
     }
     GlobalVarsService.file_url='https://karyarat2.0.dearsociety.in/';
-    GlobalVarsService.api_url='https://arcane-coast-34652.herokuapp.com/';
+    GlobalVarsService.api_url='https://zetaapi.herokuapp.com/';
   }
 
   public static check_mobile_number(number)
